@@ -29,10 +29,10 @@ a:hover {
 .hero {
   position: relative;
   height: 100vh;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
 .title-nav-container {
@@ -42,37 +42,61 @@ a:hover {
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: auto;
-  transition: transform 0.5s ease;
   gap: 3rem;
   padding: 0 1rem;
+  transition: all 0.5s ease;
+  user-select: none;
+}
+
+.title-nav-container.scrolled {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  transform: none;
 }
 
 .hero-title {
   font-size: 6vw;
   letter-spacing: 0.3em;
   cursor: pointer;
-  user-select: none;
   white-space: nowrap;
+  user-select: none;
   transition: transform 0.3s ease;
 }
 
+/* NAVIGATION (MENÜ) */
 .nav-wrapper {
   display: flex;
   align-items: center;
   gap: 2rem;
+  
+  /* Menü unsichtbar am Anfang */
   opacity: 0;
+  pointer-events: none;
+  
+  /* Menü rechts oben fixieren */
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  
   transition: opacity 0.5s ease;
+}
+
+.nav-wrapper.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .main-nav a {
   font-size: 1.5rem;
   white-space: nowrap;
-  margin-left: 1rem;
   font-weight: 600;
+  margin-left: 1rem;
+  cursor: pointer;
 }
 
+/* PLUS-SYMBOL + BUTTON */
 .close-btn {
   font-size: 2rem;
   cursor: pointer;
@@ -82,7 +106,11 @@ a:hover {
   line-height: 1;
 }
 
-/* DESIGN TEXTS */
+.close-btn:hover {
+  transform: rotate(45deg);
+}
+
+/* ANIMIERTE DESIGN TEXTE */
 .design-section {
   margin-top: 200px;
   padding: 100px 0;
@@ -97,17 +125,12 @@ a:hover {
   font-size: 3rem;
   letter-spacing: 2rem;
   white-space: nowrap;
-  transition: transform 0.3s ease;
   max-width: 100vw;
   overflow: hidden;
+  transition: transform 0.3s ease;
 }
 
-/* OPTIONAL: Hover effect for + button turning into X */
-.close-btn:hover {
-  transform: rotate(45deg);
-}
-
-/* Responsive adjustments */
+/* RESPONSIVE */
 @media (max-width: 768px) {
   .hero-title {
     font-size: 12vw;
