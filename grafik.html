@@ -1,26 +1,13 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TILL ESER – Grafik & Illustration</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Helvetica Neue', sans-serif; background: #000; color: #fff; overflow-x: hidden; }
-    .title-nav-container { position: fixed; top: 0; left: 0; width: 100%; background: #000; display: flex;
-      justify-content: space-between; align-items: center; padding: 1rem 2rem; z-index: 999; }
-    .hero-title { font-size: 1.5rem; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; }
-    .main-nav { display: flex; gap: 2rem; text-transform: uppercase; font-size: 1.5rem; font-weight: 600; justify-content: flex-end; }
-    .main-nav a { text-decoration: none; color: #fff; transition: color 0.3s; }
-    .main-nav a:hover { color: #ff5a5f; }
-    .close-btn { font-size: 2rem; color: white; cursor: pointer; transition: transform 0.3s ease; margin-left: 2rem; }
-    .close-btn:hover { transform: rotate(45deg); }
-    .nav-wrapper { display: flex; align-items: center; }
-    .page-content { padding: 10rem 2rem 2rem; text-align: center; font-size: 1rem; text-transform: lowercase; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GRAFIK & ILLUSTRATION – TILL ESER</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="title-nav-container">
+  <header class="header-scrolled">
     <h1 class="hero-title" onclick="window.location.href='index.html'">TILL ESER</h1>
     <div class="nav-wrapper">
       <nav class="main-nav">
@@ -29,11 +16,15 @@
         <a href="grafik.html">GRAFIK & ILLUSTRATION</a>
         <a href="kontakt.html">CONTACT</a>
       </nav>
-      <div class="close-btn" onclick="window.location.href='index.html'">+</div>
+      <div class="close-btn" id="closeBtn">+</div>
     </div>
-  </div>
-  <div class="page-content">
-    <p>Dies ist die Grafik & Illustration-Seite. Hier kannst du deinen Inhalt einfügen.</p>
-  </div>
+  </header>
+
+  <main class="page-content">
+    <h2>Grafik & Illustration</h2>
+    <p>Hier kommen deine Grafik & Illustration Inhalte.</p>
+  </main>
+
+<script src="script.js"></script>
 </body>
 </html>
