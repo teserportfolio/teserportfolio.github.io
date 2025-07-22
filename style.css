@@ -11,6 +11,7 @@ body {
   color: #fff;
   overflow-x: hidden;
   text-transform: uppercase;
+  user-select: none;
 }
 
 a {
@@ -24,7 +25,7 @@ a:hover {
   color: #ff5a5f;
 }
 
-/* HERO */
+/* HERO Bereich */
 .hero {
   position: relative;
   height: 100vh;
@@ -41,31 +42,29 @@ a:hover {
   pointer-events: none;
 }
 
-/* Container für Titel und Navigation */
+/* Container für Titel + Nav + + */
 .title-nav-container {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 2rem;
   transition: all 0.5s ease;
   z-index: 10;
 }
 
-/* Titel */
 .hero-title {
   font-size: 10vw;
   cursor: pointer;
-  user-select: none;
   letter-spacing: 0.3em;
-  mix-blend-mode: difference;
+  mix-blend-mode: difference; /* Negativ zum Bild */
   white-space: nowrap;
   transition: all 0.5s ease;
 }
 
-/* Navigation */
+/* Navigation - versteckt am Anfang */
 .main-nav {
   display: none;
   gap: 2rem;
@@ -87,40 +86,39 @@ a:hover {
   transform: rotate(45deg);
 }
 
-/* Menü und + Button sichtbar nach Scroll */
+/* Scroll State: Menü erscheint rechts oben, + daneben, Titel links oben */
 .scrolled .title-nav-container {
   top: 1rem;
   right: 1rem;
   left: auto;
-  transform: translate(0, 0) scale(1);
+  transform: translate(0, 0);
   justify-content: flex-end;
+  width: auto;
 }
 
-/* Titel kleiner und links oben nach Scroll */
 .scrolled .hero-title {
   position: fixed;
   top: 1rem;
   left: 1rem;
-  transform: translate(0, 0) scale(0.5) !important;
   font-size: 2.4rem;
   letter-spacing: 0.15em;
   mix-blend-mode: normal;
   color: #fff;
+  transform: translate(0, 0);
   cursor: pointer;
+  user-select: none;
+  transition: all 0.5s ease;
   z-index: 15;
 }
 
-/* Menü sichtbar nach Scroll */
 .scrolled .main-nav {
   display: flex;
 }
 
-/* Design Schriftzüge */
+/* Design Section - unter dem Hero */
 .design-section {
   position: relative;
   margin-top: 2rem;
-  height: auto;
-  overflow: visible;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -129,6 +127,7 @@ a:hover {
   user-select: none;
 }
 
+/* Design Worte (animiert) */
 .scroll-text {
   font-size: 2rem;
   font-weight: 600;
@@ -137,7 +136,6 @@ a:hover {
   opacity: 0;
   transform: translateX(0);
   transition: transform 0.5s ease, opacity 0.5s ease;
-  user-select: none;
 }
 
 .scroll-text[data-direction="ltr"] {
