@@ -75,28 +75,38 @@
       color: #ff5a5f;
     }
 
+    /* Design Schrift unten klein mit viel Abstand */
     .design-types {
       margin-top: 100vh;
       padding: 5rem 1rem;
-      font-size: 8vw;
-      font-weight: bold;
+      font-size: 1rem; /* sehr klein */
+      font-weight: 600;
       text-transform: uppercase;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 5rem;
+      gap: 2rem;
+      letter-spacing: 0.7em; /* viel Abstand */
     }
 
     .design-line {
-      opacity: 0;
-      transform: translateY(50px);
-      transition: all 1s ease;
+      white-space: nowrap;
+      display: inline-block;
+      animation: scroll-left 30s linear infinite;
     }
 
-    .design-line.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .design-line.reverse {
+      animation: scroll-right 30s linear infinite;
+    }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    @keyframes scroll-right {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
     }
 
     .scrolled .title-nav-container {
@@ -121,7 +131,8 @@
     }
 
     .close-btn {
-      position: absolute;
+      position: fixed;
+      top: 2rem;
       right: 2rem;
       font-size: 2rem;
       color: white;
@@ -135,9 +146,8 @@
     }
 
     .scrolled .close-btn {
-      position: fixed;
       top: 1.5rem;
-      right: 2rem;
+      right: 1.5rem;
     }
   </style>
 </head>
@@ -153,34 +163,25 @@
         <a href="grafik.html">Grafik & Illustration</a>
         <a href="kontakt.html">Contact</a>
       </nav>
-      <div class="close-btn" onclick="window.location.href='index.html'">+</div>
     </div>
+    <div class="close-btn" onclick="window.location.href='index.html'">+</div>
   </div>
 
   <section class="design-types">
-    <div class="design-line" id="line1">INDUSTRIALDESIGN</div>
-    <div class="design-line" id="line2">URBANDESIGN</div>
-    <div class="design-line" id="line3">INTEGRATEDDESIGN</div>
-    <div class="design-line" id="line4">PRODUKTDESIGN</div>
-    <div class="design-line" id="line5">GRAFIKDESIGN</div>
+    <div class="design-line">PRODUKTDESIGN</div>
+    <div class="design-line reverse">INDUSTRIALDESIGN</div>
+    <div class="design-line">INTEGRATEDDESIGN</div>
+    <div class="design-line reverse">URBANDESIGN</div>
+    <div class="design-line">GRAFIKDESIGN</div>
   </section>
 
   <script>
     window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      if (scrollY > 50) {
+      if (window.scrollY > 50) {
         document.body.classList.add('scrolled');
       } else {
         document.body.classList.remove('scrolled');
       }
-
-      const lines = document.querySelectorAll('.design-line');
-      lines.forEach((line, index) => {
-        const trigger = window.innerHeight * 0.5 + index * 100;
-        if (scrollY > trigger) {
-          line.classList.add('visible');
-        }
-      });
     });
   </script>
 </body>
