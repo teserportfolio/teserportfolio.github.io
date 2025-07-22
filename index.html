@@ -143,6 +143,11 @@
     .close-btn:hover {
       transform: rotate(45deg);
     }
+
+    .scrolled .close-btn {
+      top: 1.5rem;
+      right: 1.5rem;
+    }
   </style>
 </head>
 <body>
@@ -158,16 +163,16 @@
         <a href="kontakt.html">Contact</a>
       </nav>
     </div>
+    <div class="close-btn" onclick="window.location.href='index.html'">+</div>
   </div>
 
   <section class="design-types">
-    <div class="design-line">PRODUKTDESIGN – INDUSTRIALDESIGN – INTEGRATEDDESIGN – URBANDESIGN – GRAFIKDESIGN</div>
-    <div class="design-line reverse">GRAFIKDESIGN – URBANDESIGN – INTEGRATEDDESIGN – INDUSTRIALDESIGN – PRODUKTDESIGN</div>
-    <div class="design-line">PRODUKTDESIGN – INDUSTRIALDESIGN – INTEGRATEDDESIGN – URBANDESIGN – GRAFIKDESIGN</div>
-    <div class="design-line reverse">GRAFIKDESIGN – URBANDESIGN – INTEGRATEDDESIGN – INDUSTRIALDESIGN – PRODUKTDESIGN</div>
+    <div class="design-line">PRODUKTDESIGN</div>
+    <div class="design-line reverse">INDUSTRIALDESIGN</div>
+    <div class="design-line">INTEGRATEDDESIGN</div>
+    <div class="design-line reverse">URBANDESIGN</div>
+    <div class="design-line">GRAFIKDESIGN</div>
   </section>
-
-  <div class="close-btn" onclick="window.location.href='index.html'">+</div>
 
   <script>
     window.addEventListener('scroll', () => {
