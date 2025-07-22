@@ -122,6 +122,35 @@
       display: flex;
       align-items: center;
     }
+
+    .design-section {
+      margin-top: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .scroll-text {
+      font-size: 17px;
+      letter-spacing: 15vw;
+      text-transform: uppercase;
+      white-space: nowrap;
+      will-change: transform;
+      position: relative;
+      animation: scrollText 15s linear infinite;
+    }
+
+    .scroll-text:nth-child(even) {
+      animation-direction: reverse;
+    }
+
+    @keyframes scrollText {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
   </style>
 </head>
 <body>
@@ -139,6 +168,14 @@
         <div class="close-btn" onclick="window.location.href='index.html'">+</div>
       </div>
     </div>
+  </div>
+
+  <div class="design-section">
+    <div class="scroll-text">INDUSTRIALDESIGN</div>
+    <div class="scroll-text">URBANDESIGN</div>
+    <div class="scroll-text">INTEGRATEDDESIGN</div>
+    <div class="scroll-text">PRODUKTDESIGN</div>
+    <div class="scroll-text">GRAFIKDESIGN</div>
   </div>
 
   <script>
