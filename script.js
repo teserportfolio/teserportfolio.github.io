@@ -1,48 +1,57 @@
-const heroTitle = document.querySelector('.hero-title');
-const scrollTexts = document.querySelectorAll('.scroll-text');
+// Elemente abholen
+const titleNav = document.getElementById('titleNav');
+const heroTitle = document.getElementById('heroTitle');
+const mainNav = document.querySelector('.main-nav');
 const closeBtn = document.getElementById('closeBtn');
+const designSection = document.getElementById('designSection');
+const scrollTexts = designSection.querySelectorAll('.scroll-text');
 
-const maxScroll = 300; // Scrollbereich für Animationen
+let lastScrollY = 0;
+let maxScrollForAnimation = 300; // scroll-distance für Animationen
 
+// + Button Klick -> Zur Startseite (index.html)
+closeBtn.addEventListener('click', () => {
+  window.location.href = 'index.html';
+});
+
+// Scroll-Event
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
 
-  // Menü und Titel anzeigen ab 50px Scroll
+  // Menü und TILL ESER Animation ab 50px Scroll
   if (scrollY > 50) {
     document.body.classList.add('scrolled');
+    heroTitle.classList.add('tilt-left-top');
   } else {
     document.body.classList.remove('scrolled');
+    heroTitle.classList.remove('tilt-left-top');
   }
 
-  // TILL ESER bewegt sich nach links oben und wird kleiner
-  const progress = Math.min(scrollY / maxScroll, 1);
+  // TILL ESER wandert und skaliert progressiv bis maxScrollForAnimation
+  let progress = Math.min(scrollY / maxScrollForAnimation, 1);
 
-  const translateX = -progress * heroTitle.getBoundingClientRect().left; // bis ganz links (0)
-  const translateY = -progress * (heroTitle.getBoundingClientRect().top + window.scrollY); // bis ganz oben (0)
-  const scale = 1 - 0.6 * progress; // von 1 auf 0.4 skalieren
+  // Position und Größe vom Titel (linear interpoliert)
+  // Anfang: mittig (50%,50%), scale 1
+  // Ende: links oben (1rem, 1rem), scale 0.5
+  const left = (50 - 49 * progress); // von 50% zu 1%
+  const top = (50 - 49 * progress);  // von 50% zu 1%
+  const scale = 1 - 0.5 * progress;  // von 1 zu 0.5
 
-  heroTitle.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+  titleNav.style.left = left + '%';
+  titleNav.style.top = top + '%';
+  titleNav.style.transform = `translate(-${left}%, -${top}%) scale(${scale})`;
 
-  // Design-Schriftzüge schieben sich rein
-  scrollTexts.forEach(el => {
-    const direction = el.getAttribute('data-direction');
-    const baseOffset = 150; // Startposition außerhalb (in Prozent)
-
-    let posPercent = baseOffset * (1 - progress);
-
-    if (direction === 'ltr') {
-      // Von links rein: left startet bei -150%, geht auf 0%
-      el.style.left = `${-posPercent}%`;
-      el.style.right = 'auto';
+  // Design Schriftzüge mit ScrollY bewegen
+  scrollTexts.forEach(text => {
+    let dir = text.getAttribute('data-direction');
+    if (scrollY < maxScrollForAnimation) {
+      // Je nach Richtung bewegen (von -150% oder 150% nach 0)
+      let pos = dir === 'ltr' ? -150 + (150 * progress) : 150 - (150 * progress);
+      text.style.transform = `translateX(${pos}%)`;
+      text.style.opacity = progress;
     } else {
-      // Von rechts rein: right startet bei -150%, geht auf 0%
-      el.style.right = `${-posPercent}%`;
-      el.style.left = 'auto';
+      text.style.transform = `translateX(0)`;
+      text.style.opacity = 1;
     }
   });
-});
-
-// + Button klick zurück zur Startseite
-closeBtn.addEventListener('click', () => {
-  window.location.href = 'index.html';
 });
