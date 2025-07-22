@@ -3,59 +3,105 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TILL ESER – Start</title>
+  <title>TILL ESER – START</title>
   <style>
-    body {
-      margin: 0;
+    /* Grundsetup */
+    body, html {
+      margin: 0; padding: 0;
+      height: 200vh; /* genug für Scroll */
       background: #000;
       color: #fff;
       font-family: 'Helvetica Neue', sans-serif;
       overflow-x: hidden;
-      height: 200vh; /* damit scrollen möglich ist */
     }
-    .header-container {
+
+    /* Container für Schrift und Bild */
+    .hero {
+      position: relative;
       height: 100vh;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      position: relative;
+      justify-content: center;
+      overflow: hidden;
+      padding: 0 2rem;
     }
-    h1 {
-      font-size: 5rem;
-      margin: 0;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      user-select: none;
-    }
-    nav {
+
+    /* Weißes Bild als Platzhalter */
+    .hero img {
       position: absolute;
-      bottom: 50px; /* Menü 50px unter dem Namen */
+      right: 10%;
+      bottom: 10%;
+      max-width: 40vw;
+      max-height: 60vh;
+      object-fit: contain;
+      filter: brightness(1);
+      transition: opacity 0.8s ease;
+    }
+
+    /* Überschrift */
+    h1 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8vw; /* responsive große Schrift */
+      font-weight: 900;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      user-select: none;
+      transition: 
+        transform 1s ease, 
+        top 1s ease, 
+        left 1s ease,
+        font-size 1s ease;
+      will-change: transform, top, left, font-size;
+    }
+
+    /* Zustand beim Scroll: Schrift oben links */
+    h1.scrolled {
+      top: 2rem;
+      left: 2rem;
+      font-size: 2.5vw;
+      transform: translate(0, 0);
+    }
+
+    /* Menü unten zentriert, erscheint beim scrollen */
+    nav {
+      position: fixed;
+      bottom: 30px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 2rem;
+      gap: 2.5rem;
+      opacity: 0;
+      pointer-events: none;
       font-weight: 600;
       font-size: 1.2rem;
-      opacity: 0;
-      transition: opacity 0.8s ease;
+      text-transform: uppercase;
+      transition: opacity 0.6s ease;
       user-select: none;
-      pointer-events: none; /* Verhindert Klicks, wenn unsichtbar */
+      z-index: 10;
     }
+
     nav.visible {
       opacity: 1;
-      pointer-events: auto; /* Klicks ermöglichen, wenn sichtbar */
+      pointer-events: auto;
     }
+
     nav a {
       color: #fff;
       text-decoration: none;
-      padding: 0.3rem 0.5rem;
-      border-bottom: 2px solid transparent; /* Kann bleiben für Hover */
+      border-bottom: 2px solid transparent;
+      padding-bottom: 3px;
       transition: border-color 0.3s;
     }
+
     nav a:hover {
       border-color: #ff5a5f;
     }
+
+    /* Footer */
     footer {
       text-align: center;
       padding: 1rem;
@@ -65,37 +111,47 @@
       position: fixed;
       bottom: 0;
       width: 100%;
+      user-select: none;
     }
   </style>
 </head>
 <body>
 
-  <div class="header-container">
-    <h1>TILL ESER</h1>
-    <nav id="mainNav">
-      <a href="index.html">Start</a>
-      <a href="design.html">Design</a>
-      <a href="cv.html">CV</a>
-      <a href="grafik.html">Grafik</a>
-      <a href="illustration.html">Illustrations</a>
-      <a href="kontakt.html">Contact</a>
-    </nav>
+  <div class="hero">
+    <h1 id="mainTitle">TILL ESER</h1>
+    <img src="https://via.placeholder.com/600x800/ffffff/000000?text=WEISSES+BILD" alt="Weißes Platzhalterbild" id="heroImage" />
   </div>
+
+  <nav id="mainNav">
+    <a href="index.html">Start</a>
+    <a href="design.html">Design</a>
+    <a href="cv.html">CV</a>
+    <a href="grafik.html">Grafik</a>
+    <a href="illustration.html">Illustrations</a>
+    <a href="kontakt.html">Contact</a>
+  </nav>
 
   <footer>
     © 2025 TILL ESER – Alle Rechte vorbehalten.
   </footer>
 
   <script>
+    const mainTitle = document.getElementById('mainTitle');
+    const nav = document.getElementById('mainNav');
+
     window.addEventListener('scroll', () => {
-      const nav = document.getElementById('mainNav');
-      const triggerPoint = 50; // scrollY ab 50px sichtbar
-      if (window.scrollY > triggerPoint) {
+      const scrollY = window.scrollY;
+      const triggerPoint = 100; // Wann die Animation starten soll
+
+      if (scrollY > triggerPoint) {
+        mainTitle.classList.add('scrolled');
         nav.classList.add('visible');
       } else {
+        mainTitle.classList.remove('scrolled');
         nav.classList.remove('visible');
       }
     });
   </script>
 </body>
 </html>
+
