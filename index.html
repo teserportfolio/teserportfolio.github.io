@@ -123,41 +123,28 @@
     }
   </style>
 </head>
-<body>
+/* Ersetze diese Klasse */
+body.scrolled .title-nav-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem;
+  justify-content: space-between;
+  align-items: center;
+  background: #000; /* Optional: schwarzer Hintergrund beim Scroll */
+  z-index: 1000;
+  transform: none;
+}
 
-  <!-- Close Button -->
-  <div class="close-button" onclick="location.href='index.html'">+</div>
+/* Passt Größe an */
+body.scrolled .hero-title {
+  font-size: 1.5rem;
+}
 
-  <!-- Hero Section -->
-  <div class="hero">
-    <img src="white-placeholder.jpg" alt="Placeholder" class="hero-image" />
+body.scrolled nav.main-nav {
+  font-size: 1.5rem;
+  justify-content: flex-end;
+}
 
-    <div class="title-nav-container">
-      <h1 class="hero-title">TILL ESER</h1>
-      <nav class="main-nav">
-        <a href="index.html">Start</a>
-        <a href="design.html">Design</a>
-        <a href="cv.html">CV</a>
-        <a href="grafik-illustration.html">Grafik & Illustration</a>
-        <a href="kontakt.html">Contact</a>
-      </nav>
-    </div>
-  </div>
-
-  <!-- Design Types Block -->
-  <section class="design-types">
-    <p>PRODUKT-<br />INDUSTRIAL-<br />INTEGRATED-<br />URBAN-<br />GRAFIKDESIGN</p>
-  </section>
-
-  <!-- Script for Scroll -->
-  <script>
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        document.body.classList.add('scrolled');
-      } else {
-        document.body.classList.remove('scrolled');
-      }
-    });
-  </script>
-</body>
 </html>
