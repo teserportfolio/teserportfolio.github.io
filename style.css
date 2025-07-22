@@ -1,3 +1,4 @@
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -15,8 +16,14 @@ body {
 a {
   color: #fff;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
+a:hover {
+  color: #ff5a5f;
+}
+
+/* --- HERO (index) --- */
 .hero {
   position: relative;
   height: 100vh;
@@ -42,14 +49,16 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 1s ease;
-  z-index: 10;
+  padding: 0 1rem;
+  transition: all 0.8s ease;
+  opacity: 1;
 }
 
 .hero-title {
   font-size: 8vw;
   letter-spacing: 0.3em;
   cursor: pointer;
+  user-select: none;
   white-space: nowrap;
   transition: all 0.8s ease;
 }
@@ -59,54 +68,93 @@ a {
   align-items: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.8s ease;
-  gap: 2rem;
-}
-
-.nav-wrapper.visible {
-  opacity: 1;
-  pointer-events: auto;
+  transition: opacity 0.6s ease;
 }
 
 .main-nav {
   display: flex;
   gap: 2rem;
-  font-size: 1.2rem;
+  font-weight: 600;
+  font-size: 1.7rem;
+  white-space: nowrap;
 }
 
 .close-btn {
-  font-size: 2rem;
+  font-size: 2.5rem;
+  margin-left: 1rem;
   cursor: pointer;
+  user-select: none;
   transition: transform 0.3s ease;
+  line-height: 1;
 }
 
 .close-btn:hover {
   transform: rotate(45deg);
 }
 
+/* Menü sichtbar nach Scroll */
+.scrolled .nav-wrapper {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .scrolled .title-nav-container {
   position: fixed;
-  top: 1rem;
-  left: 1rem;
+  top: 15px;
+  right: 20px;
+  left: auto;
   transform: none;
+  width: auto;
+  max-width: none;
+  background: transparent;
+  padding: 0;
+  gap: 1rem;
+  justify-content: flex-end;
 }
 
 .scrolled .hero-title {
-  font-size: 2rem;
+  font-size: 1.7rem;
+  position: fixed;
+  top: 15px;
+  left: 20px;
   transform: none;
+  white-space: nowrap;
 }
 
-/* Design-Begriffe */
+/* Design Section - bewegte Wörter */
 .design-section {
-  padding: 5rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
+  margin-top: 100vh;
+  overflow: hidden;
+  height: 5rem;
+  position: relative;
 }
 
 .scroll-text {
+  font-weight: 700;
   font-size: 3rem;
   white-space: nowrap;
-  letter-spacing: 2rem;
-  transition: transform 0.3s ease-out;
+  letter-spacing: 5rem;
+  position: absolute;
+  width: 100%;
+  user-select: none;
+  pointer-events: none;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Links nach rechts scrollen */
+.scroll-text[data-direction="ltr"] {
+  left: -100%;
+}
+
+/* Rechts nach links scrollen */
+.scroll-text[data-direction="rtl"] {
+  right: -100%;
+}
+
+/* Container für scroll text fixieren */
+.design-section {
+  position: relative;
+  height: 80px;
+  overflow: hidden;
 }
