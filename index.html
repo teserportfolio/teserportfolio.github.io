@@ -117,35 +117,6 @@
       right: 2rem;
     }
 
-    .design-types {
-      padding: 5rem 0;
-      display: flex;
-      flex-direction: column;
-      gap: 4rem;
-      overflow: hidden;
-      background: #000;
-    }
-
-    .marquee-line {
-      white-space: nowrap;
-      overflow: hidden;
-      position: relative;
-      font-size: 17px;
-      font-weight: normal;
-      text-transform: uppercase;
-      letter-spacing: 5rem;
-      color: #fff;
-      height: 3rem;
-    }
-
-    .marquee-content {
-      display: inline-block;
-      white-space: nowrap;
-      position: relative;
-      transform: translateX(0px);
-      transition: transform 0.2s ease-out;
-    }
-
     .nav-wrapper {
       display: flex;
       align-items: center;
@@ -159,52 +130,21 @@
       <h1 class="hero-title">TILL ESER</h1>
       <div class="nav-wrapper">
         <nav class="main-nav">
-          <a href="index.html">Start</a>
-          <a href="design.html">Design</a>
+          <a href="index.html">START</a>
+          <a href="design.html">DESIGN</a>
           <a href="cv.html">CV</a>
-          <a href="grafik.html">Grafik & Illustration</a>
-          <a href="kontakt.html">Contact</a>
+          <a href="grafik.html">GRAFIK & ILLUSTRATION</a>
+          <a href="kontakt.html">CONTACT</a>
         </nav>
         <div class="close-btn" onclick="window.location.href='index.html'">+</div>
       </div>
     </div>
   </div>
 
-  <section class="design-types">
-    <div class="marquee-line" data-direction="left">
-      <div class="marquee-content">I N D U S T R I A L D E S I G N</div>
-    </div>
-    <div class="marquee-line" data-direction="right">
-      <div class="marquee-content">U R B A N D E S I G N</div>
-    </div>
-    <div class="marquee-line" data-direction="left">
-      <div class="marquee-content">I N T E G R A T E D D E S I G N</div>
-    </div>
-    <div class="marquee-line" data-direction="right">
-      <div class="marquee-content">P R O D U K T D E S I G N</div>
-    </div>
-    <div class="marquee-line" data-direction="left">
-      <div class="marquee-content">G R A F I K D E S I G N</div>
-    </div>
-  </section>
-
   <script>
-    // Menü-Verkleinerung beim Scrollen
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
       document.body.classList.toggle('scrolled', scrollY > 50);
-    });
-
-    // Scrollgetriebene Bewegung der Design-Zeilen
-    window.addEventListener('scroll', () => {
-      const scrollAmount = window.scrollY;
-
-      document.querySelectorAll('.marquee-line').forEach((line, index) => {
-        const content = line.querySelector('.marquee-content');
-        const direction = line.dataset.direction === 'left' ? -1 : 1;
-        const offset = (scrollAmount * 0.3 + index * 100) * direction;
-        content.style.transform = `translateX(${offset}px)`;
-      });
     });
   </script>
 </body>
