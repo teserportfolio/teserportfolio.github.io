@@ -1,141 +1,96 @@
+/* Reset */
 * {
-  margin: 0; padding: 0; box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
 body {
-  font-family: 'Helvetica Neue', sans-serif;
-  background: #000;
-  color: #fff;
-  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  min-height: 200vh;
+  background: #f0f0f0;
 }
-.hero {
-  position: relative;
-  height: 100vh;
+
+/* Menü */
+.sticky-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
   width: 100%;
-  overflow: hidden;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 15px 40px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 1000;
 }
-.hero-image {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  z-index: -1;
+
+.sticky-menu ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
 }
-.title-nav-container {
+
+.sticky-menu ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.sticky-menu ul li a:hover,
+.sticky-menu ul li a.active {
+  color: #0077ff;
+}
+
+/* Plus-Zeichen rechts */
+.sticky-menu .plus {
+  font-size: 28px;
+  font-weight: bold;
+  color: #0077ff;
+  margin-left: 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Till Eser mittig, wandert beim scrollen */
+#till-eser {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 3rem;
-  transition: all 1.2s ease;
+  font-size: 48px;
+  font-weight: 700;
+  color: #222;
+  transition: top 0.3s ease, left 0.3s ease, transform 0.3s ease, font-size 0.3s ease;
   pointer-events: none;
-  opacity: 0;
-  z-index: 1000;
+  z-index: 900;
 }
-.hero-title {
-  font-size: 80px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 1.2s ease;
-  pointer-events: auto;
-}
-.main-nav {
-  display: flex;
-  gap: 2rem;
-  text-transform: uppercase;
-  font-size: 30px;
-  font-weight: 600;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.8s ease;
-}
-.main-nav a {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-.main-nav a:hover {
-  color: #ff5a5f;
-}
-.close-btn {
-  font-size: 30px;
-  color: #fff;
-  cursor: pointer;
-  user-select: none;
-  transition: transform 0.3s ease;
-  pointer-events: none;
-  opacity: 0;
-  margin-left: 1rem;
-  line-height: 1;
-}
-.close-btn:hover {
-  transform: rotate(45deg);
-}
-.scrolled .title-nav-container {
-  top: 1rem;
-  left: 1rem;
-  transform: none;
-  justify-content: space-between;
-  pointer-events: auto;
-  opacity: 1;
-  max-width: 1200px;
-  display: flex;
-  align-items: center;
-}
-.scrolled .hero-title {
-  font-size: 30px;
-  text-align: left;
+
+#till-eser.scrolled {
+  top: 20px;
+  left: 40px;
   transform: translate(0, 0);
+  font-size: 28px;
 }
-.scrolled .main-nav {
-  opacity: 1;
-  pointer-events: auto;
-}
-.scrolled .close-btn {
-  opacity: 1;
-  pointer-events: auto;
-  position: relative;
-}
-.nav-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-.design-section {
-  margin-top: 100vh;
-  text-align: center;
-  overflow: hidden;
-}
+
+/* Bewegte Textzeilen */
 .scroll-text {
-  font-size: 17px;
-  letter-spacing: 15vw;
-  text-transform: uppercase;
-  white-space: nowrap;
-  will-change: transform;
-  position: relative;
-  animation: scrollText 15s linear infinite;
+  opacity: 0;
+  transform: translateY(40px);
+  font-size: 24px;
+  padding: 15px 30px;
+  background: white;
+  margin: 40px auto;
+  max-width: 600px;
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
-.scroll-text:nth-child(even) {
-  animation-direction: reverse;
-}
-@keyframes scrollText {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-.page-content {
-  padding: 8rem 2rem;
-  text-align: center;
-  font-size: 2rem;
-  text-transform: uppercase;
+
+.scroll-text.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
