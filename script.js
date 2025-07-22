@@ -1,41 +1,40 @@
-const titleNav = document.querySelector('.title-nav-container');
 const heroTitle = document.querySelector('.hero-title');
-const navWrapper = document.querySelector('.nav-wrapper');
 const scrollTexts = document.querySelectorAll('.scroll-text');
 const closeBtn = document.getElementById('closeBtn');
 
-let scrollPos = 0;
-let maxScrollForAnimation = 500; // Scrollbereich für Animation
+const maxScrollForAnimation = 500; // Scrollbereich für Animation
 
 window.addEventListener('scroll', () => {
-  scrollPos = window.scrollY;
+  const scrollPos = window.scrollY;
 
-  // Menü und Title sichtbar machen ab 50px scroll
-  if(scrollPos > 50) {
+  // Menü und Titel anzeigen ab 50px Scroll
+  if (scrollPos > 50) {
     document.body.classList.add('scrolled');
   } else {
     document.body.classList.remove('scrolled');
   }
 
-  // TILL ESER diagonal links oben wandern und kleiner werden
-  let maxTitleShift = 80; // px nach oben und links
-  let scrollFactor = Math.min(scrollPos / maxScrollForAnimation, 1);
+  // TILL ESER nach links oben bewegen (nicht diagonal)
+  const scrollFactor = Math.min(scrollPos / maxScrollForAnimation, 1);
 
-  let shift = maxTitleShift * scrollFactor;
-  let scale = 1 - 0.8 * scrollFactor;
+  const shiftX = 80 * scrollFactor;  // 80px nach links
+  const shiftY = 80 * scrollFactor;  // 80px nach oben
+  const scale = 1 - 0.8 * scrollFactor;
 
-  heroTitle.style.transform = `translate(${-shift}px, ${-shift}px) scale(${scale})`;
+  heroTitle.style.transform = `translate(${-shiftX}px, ${-shiftY}px) scale(${scale})`;
 
-  // Designwörter reinbewegen, stoppen in Mitte
+  // Designwörter bewegen: links nach rechts oder rechts nach links bis Mitte
   scrollTexts.forEach(el => {
-    let dir = el.getAttribute('data-direction');
-    let moveFactor = Math.min(scrollPos / maxScrollForAnimation, 1);
+    const dir = el.getAttribute('data-direction');
+    const moveFactor = Math.min(scrollPos / maxScrollForAnimation, 1);
 
-    if(dir === 'ltr') {
-      el.style.left = `${-100 + moveFactor * 150}%`; // Von links rein bis Mitte
+    if (dir === 'ltr') {
+      // Von links nach Mitte (50%)
+      el.style.left = `${-100 + moveFactor * 150}%`;
       el.style.right = 'auto';
     } else {
-      el.style.right = `${-100 + moveFactor * 150}%`; // Von rechts rein bis Mitte
+      // Von rechts nach Mitte (50%)
+      el.style.right = `${-100 + moveFactor * 150}%`;
       el.style.left = 'auto';
     }
   });
@@ -45,4 +44,3 @@ window.addEventListener('scroll', () => {
 closeBtn.addEventListener('click', () => {
   window.location.href = 'index.html';
 });
-
