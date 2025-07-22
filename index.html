@@ -2,169 +2,171 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TILL ESER</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TILL ESER – Start</title>
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
+
     body {
       font-family: 'Helvetica Neue', sans-serif;
-      background-color: #000;
+      background: #000;
       color: #fff;
       overflow-x: hidden;
     }
 
     .hero {
-      height: 100vh;
       position: relative;
+      height: 100vh;
+      width: 100%;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      text-align: center;
+      flex-direction: column;
+      overflow: hidden;
     }
 
-    .hero h1 {
-      font-size: 50px;
-      text-transform: uppercase;
-      transition: all 0.8s ease;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero.shrink h1 {
-      position: fixed;
-      top: 20px;
-      left: 30px;
-      font-size: 20px;
-    }
-
-    .background-img {
-      background: white;
+    .hero-image {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 0;
+      object-fit: cover;
+      z-index: -1;
     }
 
-    nav {
-      position: absolute;
-      top: 5%;
-      width: 100%;
+    .hero-title {
+      font-size: 8vw;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      transition: all 1.2s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .main-nav {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1rem;
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 20px;
-      z-index: 2;
-      transition: all 0.8s ease;
-    }
-
-    nav.scroll {
-      position: fixed;
-      top: 20px;
-      right: 30px;
-      width: auto;
-      justify-content: flex-end;
       gap: 2rem;
-      font-size: 14px;
+      margin-top: 2rem;
+      text-transform: uppercase;
+      font-size: 1.5rem;
+      font-weight: 600;
+      opacity: 1;
+      transition: all 1s ease;
     }
 
-    nav a {
+    .main-nav a {
       text-decoration: none;
-      color: white;
+      color: #fff;
       transition: color 0.3s;
     }
 
-    nav a:hover {
+    .main-nav a:hover {
       color: #ff5a5f;
     }
 
-    .content-block {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
+    .design-types {
+      margin-top: 100vh;
       text-align: center;
-    }
-
-    .content-block h2 {
-      font-size: 50px;
+      padding: 5rem 1rem;
+      font-size: 8vw;
+      line-height: 1.2;
       text-transform: uppercase;
-      line-height: 1.6;
-      letter-spacing: 0.1em;
+      font-weight: bold;
     }
 
-    footer {
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.8rem;
-      background: #111;
-      color: #666;
+    .scrolled .hero-title {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      font-size: 2rem;
     }
 
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 32px;
-      }
-      nav {
-        font-size: 16px;
-        flex-wrap: wrap;
-      }
-      .content-block h2 {
-        font-size: 32px;
-      }
+    .scrolled .main-nav {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      justify-content: flex-end;
+      gap: 1.2rem;
+      font-size: 1rem;
+    }
+
+    .close-btn {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      width: 2rem;
+      height: 2rem;
+      cursor: pointer;
+      z-index: 999;
+      transition: transform 0.5s ease;
+    }
+
+    .close-btn::before,
+    .close-btn::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: white;
+      transition: transform 0.5s ease;
+      top: 50%;
+      left: 0;
+    }
+
+    .close-btn::before {
+      transform: translateY(-50%) rotate(0deg);
+    }
+
+    .close-btn::after {
+      transform: translateY(-50%) rotate(90deg);
+    }
+
+    .close-btn:hover::before {
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    .close-btn:hover::after {
+      transform: translateY(-50%) rotate(-45deg);
+    }
+
+    .close-btn:hover {
+      transform: rotate(180deg);
     }
   </style>
 </head>
 <body>
-  <div class="hero" id="hero">
-    <div class="background-img"></div>
-    <h1 id="title">TILL ESER</h1>
-    <nav id="mainNav">
+  <div class="hero">
+    <img src="white-placeholder.jpg" alt="Placeholder" class="hero-image" />
+    <h1 class="hero-title">TILL ESER</h1>
+
+    <nav class="main-nav">
       <a href="index.html">Start</a>
       <a href="design.html">Design</a>
       <a href="cv.html">CV</a>
-      <a href="grafik.html">Grafik</a>
-      <a href="illustration.html">Illustration</a>
-      <a href="kontakt.html">Kontakt</a>
+      <a href="grafik-illustration.html">Grafik & Illustration</a>
+      <a href="kontakt.html">Contact</a>
     </nav>
   </div>
 
-  <div class="content-block">
-    <h2>
-      PRODUKT-,<br />
-      INDUSTRIAL-,<br />
-      INTEGRATED-,<br />
-      URBAN-,<br />
-      GRAFIKDESIGN
-    </h2>
-  </div>
+  <a href="index.html" class="close-btn" title="Zurück zur Startseite"></a>
 
-  <footer>
-    © 2025 TILL ESER – Alle Rechte vorbehalten.
-  </footer>
+  <section class="design-types">
+    <p>PRODUKT-<br />INDUSTRIAL-<br />INTEGRATED-<br />URBAN-<br />GRAFIKDESIGN</p>
+  </section>
 
   <script>
-    const hero = document.getElementById("hero");
-    const nav = document.getElementById("mainNav");
-    const title = document.getElementById("title");
-
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 100) {
-        hero.classList.add("shrink");
-        nav.classList.add("scroll");
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        document.body.classList.add('scrolled');
       } else {
-        hero.classList.remove("shrink");
-        nav.classList.remove("scroll");
+        document.body.classList.remove('scrolled');
       }
     });
   </script>
