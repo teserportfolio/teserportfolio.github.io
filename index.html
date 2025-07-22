@@ -56,7 +56,7 @@
     }
 
     .main-nav {
-      display: flex;
+      display: none;
       flex-wrap: wrap;
       gap: 2rem;
       text-transform: uppercase;
@@ -82,6 +82,10 @@
       font-weight: bold;
       text-transform: uppercase;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3rem;
     }
 
     .design-line {
@@ -116,9 +120,11 @@
 
     .scrolled .hero-title {
       font-size: 1.5rem;
+      text-align: left;
     }
 
     .scrolled .main-nav {
+      display: flex;
       font-size: 1.5rem;
       justify-content: flex-end;
     }
@@ -155,6 +161,8 @@
   </div>
 
   <section class="design-types">
+    <div class="design-line">PRODUKTDESIGN – INDUSTRIALDESIGN – INTEGRATEDDESIGN – URBANDESIGN – GRAFIKDESIGN</div>
+    <div class="design-line reverse">GRAFIKDESIGN – URBANDESIGN – INTEGRATEDDESIGN – INDUSTRIALDESIGN – PRODUKTDESIGN</div>
     <div class="design-line">PRODUKTDESIGN – INDUSTRIALDESIGN – INTEGRATEDDESIGN – URBANDESIGN – GRAFIKDESIGN</div>
     <div class="design-line reverse">GRAFIKDESIGN – URBANDESIGN – INTEGRATEDDESIGN – INDUSTRIALDESIGN – PRODUKTDESIGN</div>
   </section>
