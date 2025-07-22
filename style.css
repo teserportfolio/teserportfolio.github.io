@@ -80,6 +80,7 @@ a:hover {
   user-select: none;
   transition: transform 0.3s ease;
   color: #fff;
+  padding-left: 1rem;
 }
 
 .close-btn:hover {
@@ -89,18 +90,24 @@ a:hover {
 /* Menü und + Button sichtbar nach Scroll */
 .scrolled .title-nav-container {
   top: 1rem;
-  left: auto;
   right: 1rem;
+  left: auto;
   transform: translate(0, 0) scale(1);
+  justify-content: flex-end;
 }
 
 /* Titel kleiner und links oben nach Scroll */
 .scrolled .hero-title {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  transform: translate(0, 0) scale(0.5) !important;
   font-size: 2.4rem;
   letter-spacing: 0.15em;
   mix-blend-mode: normal;
   color: #fff;
   cursor: pointer;
+  z-index: 15;
 }
 
 /* Menü sichtbar nach Scroll */
@@ -112,13 +119,14 @@ a:hover {
 .design-section {
   position: relative;
   margin-top: 2rem;
-  height: 100px;
-  overflow: hidden;
+  height: auto;
+  overflow: visible;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
+  user-select: none;
 }
 
 .scroll-text {
