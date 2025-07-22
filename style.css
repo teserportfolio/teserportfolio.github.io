@@ -1,112 +1,82 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  margin: 0;
+  font-family: 'Helvetica Neue', sans-serif;
   background: #000;
   color: #fff;
-  font-family: 'Helvetica Neue', sans-serif;
+  overflow-x: hidden;
+  text-transform: uppercase;
 }
-header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  background: #000;
-  padding: 1rem 3rem;
-  border-bottom: 1px solid #222;
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  z-index: 999;
-}
-header a {
+
+a {
   color: #fff;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 1.2rem;
-  padding: 0.3rem 0.5rem;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.3s;
+  transition: color 0.3s ease;
 }
-header a:hover {
-  border-color: #ff5a5f;
+
+a:hover {
+  color: #ff5a5f;
 }
-main {
-  padding: 140px 3rem 100px 3rem;
-  max-width: 900px;
-  margin: 0 auto;
+
+/* --- HERO (index) --- */
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
 }
-footer {
-  text-align: center;
-  padding: 1rem;
-  font-size: 0.8rem;
-  background: #111;
-  color: #666;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+
+.hero-image {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
-h2 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-.project-box {
+
+.title-nav-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 1200px;
   display: flex;
   justify-content: space-between;
-  background: #111;
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  border: none;
-  transition: background 0.3s, transform 0.3s;
+  align-items: center;
+  padding: 0 1rem;
+  transition: all 1s ease;
 }
-.project-box:hover {
-  background: #1a1a1a;
-  transform: scale(1.01);
-}
-.project-name {
-  flex: 1;
-  font-weight: 600;
-  font-size: 1.3rem;
-  align-self: center;
-}
-.project-img {
-  flex: 1;
-  max-width: 300px;
-}
-.project-img img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-input, textarea {
-  background: #111;
-  border: none;
-  padding: 1rem;
-  color: #fff;
-  font-size: 1rem;
-}
-button {
-  padding: 1rem;
-  border: none;
-  background: #fff;
-  color: #000;
-  font-weight: bold;
+
+.hero-title {
+  font-size: 8vw;
+  letter-spacing: 0.3em;
   cursor: pointer;
-  transition: background 0.3s;
+  user-select: none;
+  white-space: nowrap;
 }
-button:hover {
-  background: #ddd;
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
 }
-@media (max-width: 700px) {
-  .project-box {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .project-img {
-    max-width: 100%;
-  }
+
+.main-nav {
+  display: none;
+  gap: 2rem;
+  font-weight: 600;
+  font-size: 1.7rem;
 }
+
+.main-nav a {
+  white-space: nowrap;
+}
+
+/* Show menu and smaller title on scroll */
+.scrolled .title-nav-container {
+  position: fixed;
+  top:
