@@ -1,129 +1,71 @@
-/* RESET */
-* {
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Helvetica Neue', sans-serif;
-  background: #000;
-  color: #fff;
+  font-family: Helvetica, sans-serif;
+  background: black;
+  color: white;
   overflow-x: hidden;
   text-transform: uppercase;
 }
 
-a {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: #ff5a5f;
-}
-
-/* HERO AREA */
 .hero {
   position: relative;
   height: 100vh;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.hero-image {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
-
-/* TITLE + NAV */
 .title-nav-container {
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 1400px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem;
-  transition: all 0.5s ease;
+  transition: transform 0.5s ease;
 }
 
 .hero-title {
-  font-size: 8vw;
+  font-size: 6vw;
   letter-spacing: 0.3em;
+  transition: transform 0.3s ease;
   cursor: pointer;
-  user-select: none;
-  white-space: nowrap;
-  transition: all 0.5s ease;
 }
 
 .nav-wrapper {
   display: flex;
   align-items: center;
-  gap: 1rem;
-}
-
-.main-nav {
-  display: flex;
   gap: 2rem;
-  font-weight: 600;
-  font-size: 1.2rem;
+  margin-left: 3rem;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
 .main-nav a {
-  white-space: nowrap;
+  font-size: 1.5rem;
+  margin-left: 1rem;
 }
 
 .close-btn {
   font-size: 2rem;
   cursor: pointer;
+  transform: rotate(0deg);
   transition: transform 0.3s ease;
 }
 
-.close-btn:hover {
-  transform: rotate(45deg);
-}
-
-/* SCROLL MODE (AFTER SCROLL STARTS) */
-.scrolled .title-nav-container {
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  transform: none;
-  width: calc(100% - 2rem);
-}
-
-.scrolled .hero-title {
-  font-size: 2rem;
-  letter-spacing: 0.1em;
-}
-
-/* DESIGN TEXTS */
 .design-section {
-  position: relative;
-  padding: 150vh 0 10vh;
+  margin-top: 200px;
+  padding: 100px 0;
   display: flex;
   flex-direction: column;
-  gap: 8vh;
+  gap: 100px;
+  align-items: center;
 }
 
 .scroll-text {
   font-size: 3rem;
-  letter-spacing: 4rem;
-  opacity: 0;
-  transform: translateX(100vw);
-  transition: transform 0.8s ease, opacity 0.8s ease;
-  white-space: nowrap;
-  text-align: center;
-}
-
-/* When visible */
-.scroll-text.visible {
-  opacity: 1;
-  transform: translateX(0);
+  letter-spacing: 2rem;
+  transition: transform 0.3s ease;
 }
