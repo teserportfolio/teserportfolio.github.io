@@ -24,3 +24,16 @@ function revealOnScroll() {
 }
 
 window.addEventListener("scroll", revealOnScroll);
+
+window.addEventListener('scroll', () => {
+  const navWrapper = document.querySelector('.nav-wrapper');
+  const titleNav = document.querySelector('.title-nav-container');
+
+  if (window.scrollY > 50) {
+    navWrapper.classList.add('visible');
+    titleNav.classList.add('scrolled');
+  } else {
+    navWrapper.classList.remove('visible');
+    titleNav.classList.remove('scrolled');
+  }
+});
