@@ -3,33 +3,30 @@ document.addEventListener("DOMContentLoaded", () => {
   const navWrapper = document.querySelector(".nav-wrapper");
   const scrollTexts = document.querySelectorAll(".scroll-text");
 
-  // === Scroll-Verhalten für TILL ESER + Menü ===
+  // Menü und Titel kleiner bei Scroll
   window.addEventListener("scroll", () => {
     const scrollTop = window.scrollY;
 
     if (scrollTop > 50) {
-      titleNav.classList.add("scrolled");
+      document.body.classList.add("scrolled");
       navWrapper.classList.add("visible");
     } else {
-      titleNav.classList.remove("scrolled");
+      document.body.classList.remove("scrolled");
       navWrapper.classList.remove("visible");
     }
   });
 
-  // === Scroll-Animation der Begriffe (Index-Seite) ===
+  // Scrolltext-Bewegung
   if (scrollTexts.length > 0) {
     window.addEventListener("scroll", () => {
-      const maxOffset = 300; // bis zu welchem scrollY die Bewegung geht
+      const maxOffset = 300;
 
-      scrollTexts.forEach((el, index) => {
+      scrollTexts.forEach((el) => {
         const direction = el.dataset.direction === "rtl" ? -1 : 1;
         const offset = Math.min(window.scrollY, maxOffset);
         const move = (maxOffset - offset) * 0.5 * direction;
-
         el.style.transform = `translateX(${move}px)`;
       });
     });
   }
-});
-
 });
