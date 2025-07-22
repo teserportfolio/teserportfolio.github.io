@@ -4,33 +4,199 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TILL ESER – Start</title>
-<link rel="stylesheet" href="style.css" />
+<style>
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background: #000;
+    color: #fff;
+    overflow-x: hidden;
+  }
+
+  .hero {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+  }
+  .hero-image {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  /* Container für Titel und Menü */
+  .title-nav-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    transition: all 1.2s ease;
+    pointer-events: none; /* Menüs unsichtbar & nicht klickbar standard */
+    opacity: 0;
+    z-index: 1000;
+  }
+
+  /* TILL ESER - groß mittig */
+  .hero-title {
+    font-size: 80px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 1.2s ease;
+    pointer-events: auto;
+  }
+
+  /* Menü unsichtbar initial */
+  .main-nav {
+    display: flex;
+    gap: 2rem;
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+  }
+  .main-nav a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .main-nav a:hover {
+    color: #ff5a5f;
+  }
+
+  /* Close Button (+) */
+  .close-btn {
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.3s ease;
+    pointer-events: none;
+    opacity: 0;
+    margin-left: 1rem;
+    line-height: 1;
+  }
+  .close-btn:hover {
+    transform: rotate(45deg);
+  }
+
+  /* Nach Scroll: Container oben links + rechts, Menü sichtbar */
+  .scrolled .title-nav-container {
+    top: 1rem;
+    left: 1rem;
+    transform: none;
+    justify-content: space-between;
+    pointer-events: auto;
+    opacity: 1;
+  }
+  .scrolled .hero-title {
+    font-size: 30px;
+    text-align: left;
+    pointer-events: auto;
+    /* diagonal nach oben links */
+    transform: translate(0, 0);
+  }
+  .scrolled .main-nav {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .scrolled .close-btn {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Layout: Titel links, Menü rechts */
+  .scrolled .title-nav-container {
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+  }
+  .scrolled .hero-title {
+    flex-shrink: 0;
+  }
+  .scrolled .nav-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Design Section unten */
+  .design-section {
+    margin-top: 100vh;
+    text-align: center;
+    overflow: hidden;
+  }
+  .scroll-text {
+    font-size: 17px;
+    letter-spacing: 15vw;
+    text-transform: uppercase;
+    white-space: nowrap;
+    will-change: transform;
+    position: relative;
+    animation: scrollText 15s linear infinite;
+  }
+  .scroll-text:nth-child(even) {
+    animation-direction: reverse;
+  }
+  @keyframes scrollText {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+</style>
 </head>
 <body>
   <div class="hero">
     <img src="white-placeholder.jpg" alt="Placeholder" class="hero-image" />
-    <div class="title-nav-container">
+    <div class="title-nav-container" id="titleNav">
       <h1 class="hero-title" onclick="window.location.href='index.html'">TILL ESER</h1>
       <div class="nav-wrapper">
         <nav class="main-nav">
           <a href="design.html">DESIGN</a>
           <a href="cv.html">CV</a>
-          <a href="grafik.html">GRAFIK & ILLUSTRATION</a>
+          <a href="grafik.html">GRAFIK &amp; ILLUSTRATION</a>
           <a href="kontakt.html">CONTACT</a>
         </nav>
-        <div class="close-btn" id="closeBtn">+</div>
+        <div class="close-btn" onclick="window.location.href='index.html'">+</div>
       </div>
     </div>
   </div>
 
   <div class="design-section">
-    <div class="scroll-text" data-direction="ltr">INDUSTRIALDESIGN</div>
-    <div class="scroll-text" data-direction="rtl">URBANDESIGN</div>
-    <div class="scroll-text" data-direction="ltr">INTEGRATEDDESIGN</div>
-    <div class="scroll-text" data-direction="rtl">PRODUKTDESIGN</div>
-    <div class="scroll-text" data-direction="ltr">GRAFIKDESIGN</div>
+    <div class="scroll-text">INDUSTRIALDESIGN</div>
+    <div class="scroll-text">URBANDESIGN</div>
+    <div class="scroll-text">INTEGRATEDDESIGN</div>
+    <div class="scroll-text">PRODUKTDESIGN</div>
+    <div class="scroll-text">GRAFIKDESIGN</div>
   </div>
 
-<script src="script.js"></script>
+<script>
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    if(scrollY > 50) {
+      document.body.classList.add('scrolled');
+    } else {
+      document.body.classList.remove('scrolled');
+    }
+  });
+</script>
 </body>
 </html>
