@@ -1,32 +1,50 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const titleNav = document.querySelector(".title-nav-container");
-  const navWrapper = document.querySelector(".nav-wrapper");
-  const scrollTexts = document.querySelectorAll(".scroll-text");
+const titleNav = document.getElementById('titleNav');
+const heroTitle = document.querySelector('.hero-title');
+const navWrapper = document.querySelector('.nav-wrapper');
+const scrollTexts = document.querySelectorAll('.scroll-text');
 
-  // Menü und Titel kleiner bei Scroll
-  window.addEventListener("scroll", () => {
-    const scrollTop = window.scrollY;
+let scrollPos = 0;
+let maxScrollForAnimation = 500; // Wie weit der Scroll für Animation wirkt
 
-    if (scrollTop > 50) {
-      document.body.classList.add("scrolled");
-      navWrapper.classList.add("visible");
+window.addEventListener('scroll', () => {
+  scrollPos = window.scrollY;
+
+  // Menü und Title sichtbar machen ab 50px scroll
+  if(scrollPos > 50) {
+    document.body.classList.add('scrolled');
+  } else {
+    document.body.classList.remove('scrolled');
+  }
+
+  // TILL ESER wandert diagonal links oben und wird kleiner
+  let maxTitleShift = 80; // px nach oben und links
+  let maxFontSize = 8; // vw original
+  let minFontSize = 1.7; // vw im Menü
+  let scrollFactor = Math.min(scrollPos / maxScrollForAnimation, 1);
+
+  // Position verschieben
+  let shift = maxTitleShift * scrollFactor;
+  heroTitle.style.transform = `translate(${-shift}px, ${-shift}px) scale(${1 - 0.8 * scrollFactor})`;
+
+  // Designwörter reinbewegen, stoppen in Mitte
+  scrollTexts.forEach(el => {
+    let dir = el.getAttribute('data-direction');
+    let moveFactor = Math.min(scrollPos / maxScrollForAnimation, 1);
+
+    if(dir === 'ltr') {
+      // Von links rein bewegen bis left: 50% - 50% width = Mitte
+      el.style.left = `${-100 + moveFactor * 150}%`; // Start -100%, Ziel ca 50%
+      el.style.right = 'auto';
     } else {
-      document.body.classList.remove("scrolled");
-      navWrapper.classList.remove("visible");
+      // Von rechts rein bewegen bis right: 50% - 50% width = Mitte
+      el.style.right = `${-100 + moveFactor * 150}%`;
+      el.style.left = 'auto';
     }
   });
-
-  // Scrolltext-Bewegung
-  if (scrollTexts.length > 0) {
-    window.addEventListener("scroll", () => {
-      const maxOffset = 300;
-
-      scrollTexts.forEach((el) => {
-        const direction = el.dataset.direction === "rtl" ? -1 : 1;
-        const offset = Math.min(window.scrollY, maxOffset);
-        const move = (maxOffset - offset) * 0.5 * direction;
-        el.style.transform = `translateX(${move}px)`;
-      });
-    });
-  }
 });
+
+// + Button klick zurück zur Startseite
+document.getElementById('closeBtn').addEventListener('click', () => {
+  window.location.href = 'index.html';
+});
+
