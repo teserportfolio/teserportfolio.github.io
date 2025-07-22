@@ -1,4 +1,4 @@
-/* Reset */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -23,7 +23,7 @@ a:hover {
   color: #ff5a5f;
 }
 
-/* --- HERO (index) --- */
+/* HERO AREA */
 .hero {
   position: relative;
   height: 100vh;
@@ -38,18 +38,19 @@ a:hover {
   z-index: -1;
 }
 
+/* TITLE + NAV */
 .title-nav-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90%;
-  max-width: 1200px;
+  max-width: 1400px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 1rem;
-  transition: all 1s ease;
+  transition: all 0.5s ease;
 }
 
 .hero-title {
@@ -58,25 +59,71 @@ a:hover {
   cursor: pointer;
   user-select: none;
   white-space: nowrap;
+  transition: all 0.5s ease;
 }
 
 .nav-wrapper {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
 .main-nav {
-  display: none;
+  display: flex;
   gap: 2rem;
   font-weight: 600;
-  font-size: 1.7rem;
+  font-size: 1.2rem;
 }
 
 .main-nav a {
   white-space: nowrap;
 }
 
-/* Show menu and smaller title on scroll */
+.close-btn {
+  font-size: 2rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.close-btn:hover {
+  transform: rotate(45deg);
+}
+
+/* SCROLL MODE (AFTER SCROLL STARTS) */
 .scrolled .title-nav-container {
   position: fixed;
-  top:
+  top: 1rem;
+  left: 1rem;
+  transform: none;
+  width: calc(100% - 2rem);
+}
+
+.scrolled .hero-title {
+  font-size: 2rem;
+  letter-spacing: 0.1em;
+}
+
+/* DESIGN TEXTS */
+.design-section {
+  position: relative;
+  padding: 150vh 0 10vh;
+  display: flex;
+  flex-direction: column;
+  gap: 8vh;
+}
+
+.scroll-text {
+  font-size: 3rem;
+  letter-spacing: 4rem;
+  opacity: 0;
+  transform: translateX(100vw);
+  transition: transform 0.8s ease, opacity 0.8s ease;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* When visible */
+.scroll-text.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
