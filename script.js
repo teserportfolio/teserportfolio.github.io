@@ -1,10 +1,11 @@
-const titleNav = document.getElementById('titleNav');
+const titleNav = document.querySelector('.title-nav-container');
 const heroTitle = document.querySelector('.hero-title');
 const navWrapper = document.querySelector('.nav-wrapper');
 const scrollTexts = document.querySelectorAll('.scroll-text');
+const closeBtn = document.getElementById('closeBtn');
 
 let scrollPos = 0;
-let maxScrollForAnimation = 500; // Wie weit der Scroll für Animation wirkt
+let maxScrollForAnimation = 500; // Scrollbereich für Animation
 
 window.addEventListener('scroll', () => {
   scrollPos = window.scrollY;
@@ -16,15 +17,14 @@ window.addEventListener('scroll', () => {
     document.body.classList.remove('scrolled');
   }
 
-  // TILL ESER wandert diagonal links oben und wird kleiner
+  // TILL ESER diagonal links oben wandern und kleiner werden
   let maxTitleShift = 80; // px nach oben und links
-  let maxFontSize = 8; // vw original
-  let minFontSize = 1.7; // vw im Menü
   let scrollFactor = Math.min(scrollPos / maxScrollForAnimation, 1);
 
-  // Position verschieben
   let shift = maxTitleShift * scrollFactor;
-  heroTitle.style.transform = `translate(${-shift}px, ${-shift}px) scale(${1 - 0.8 * scrollFactor})`;
+  let scale = 1 - 0.8 * scrollFactor;
+
+  heroTitle.style.transform = `translate(${-shift}px, ${-shift}px) scale(${scale})`;
 
   // Designwörter reinbewegen, stoppen in Mitte
   scrollTexts.forEach(el => {
@@ -32,19 +32,17 @@ window.addEventListener('scroll', () => {
     let moveFactor = Math.min(scrollPos / maxScrollForAnimation, 1);
 
     if(dir === 'ltr') {
-      // Von links rein bewegen bis left: 50% - 50% width = Mitte
-      el.style.left = `${-100 + moveFactor * 150}%`; // Start -100%, Ziel ca 50%
+      el.style.left = `${-100 + moveFactor * 150}%`; // Von links rein bis Mitte
       el.style.right = 'auto';
     } else {
-      // Von rechts rein bewegen bis right: 50% - 50% width = Mitte
-      el.style.right = `${-100 + moveFactor * 150}%`;
+      el.style.right = `${-100 + moveFactor * 150}%`; // Von rechts rein bis Mitte
       el.style.left = 'auto';
     }
   });
 });
 
 // + Button klick zurück zur Startseite
-document.getElementById('closeBtn').addEventListener('click', () => {
+closeBtn.addEventListener('click', () => {
   window.location.href = 'index.html';
 });
 
