@@ -1,234 +1,174 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>TILL ESER – START</title>
-<style>
-  * {
-    box-sizing: border-box;
-  }
-  body, html {
-    margin: 0; padding: 0;
-    height: 200vh;
-    font-family: 'Helvetica Neue', sans-serif;
-    text-transform: uppercase;
-    overflow-x: hidden;
-    color: #000;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TILL ESER</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
 
-  /* Hintergrundbild full screen */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: white url('https://via.placeholder.com/1920x1080/ffffff/cccccc?text=WEISSES+BILD') no-repeat center center;
-    background-size: cover;
-    z-index: -1;
-  }
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
 
-  /* Header - Menü Container */
-  header {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 80px;
-    background: white;
-    display: flex;
-    align-items: center;
-    padding: 0 3rem;
-    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
-    z-index: 1000;
-    overflow: hidden;
-  }
+    .hero h1 {
+      font-size: 50px;
+      text-transform: uppercase;
+      transition: all 0.8s ease;
+      position: relative;
+      z-index: 2;
+    }
 
-  /* Logo im Header */
-  header .logo {
-    font-weight: 900;
-    font-size: 1.8rem;
-    letter-spacing: 0.3em;
-    color: black;
-    user-select: none;
-    white-space: nowrap;
-    flex-shrink: 0;
-    transition: flex-basis 0.6s ease, font-size 0.6s ease;
-  }
+    .hero.shrink h1 {
+      position: fixed;
+      top: 20px;
+      left: 30px;
+      font-size: 20px;
+    }
 
-  /* Navigation Container, flexibel */
-  nav {
-    display: flex;
-    gap: 2rem;
-    overflow: hidden;
-    white-space: nowrap;
-    flex-grow: 1;
-    justify-content: flex-start; /* Start = breit */
-    transition: justify-content 0.6s ease, max-width 0.6s ease;
-    max-width: 100%; /* beginnt ganz breit */
-  }
+    .background-img {
+      background: white;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
 
-  nav a {
-    color: black;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    padding-bottom: 4px;
-    border-bottom: 2px solid transparent;
-    transition: border-color 0.3s;
-    flex-shrink: 0;
-  }
-  nav a:hover {
-    border-color: #ff5a5f;
-  }
+    nav {
+      position: absolute;
+      top: 5%;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 20px;
+      z-index: 2;
+      transition: all 0.8s ease;
+    }
 
-  /* Hero Bereich mit großem Titel */
-  .hero {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-  }
+    nav.scroll {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      width: auto;
+      justify-content: flex-end;
+      gap: 2rem;
+      font-size: 14px;
+    }
 
-  .hero h1 {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 6rem;
-    font-weight: 900;
-    letter-spacing: 0.3em;
-    color: black;
-    margin: 0;
-    white-space: nowrap;
-    transition: top 0.6s ease, left 0.6s ease, font-size 0.6s ease, transform 0.6s ease;
-    pointer-events: none;
-  }
+    nav a {
+      text-decoration: none;
+      color: white;
+      transition: color 0.3s;
+    }
 
-  /* Zustand nach Scroll: Titel diagonal nach oben links verschieben und kleiner */
-  .hero h1.scrolled {
-    top: 15px;      /* fast oben */
-    left: 20px;     /* links */
-    transform: translate(0, 0);
-    font-size: 1.8rem;
-  }
+    nav a:hover {
+      color: #ff5a5f;
+    }
 
-  /* Header Zustand bei Start (unsichtbar) */
-  header.initial {
-    pointer-events: none;
-  }
+    .content-block {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
 
-  /* Header - Menü bei Start: Nav ganz breit, linksbündig, Logo minimal sichtbar */
-  header.nav-wide .logo {
-    font-size: 0;
-    flex-basis: 0;
-    transition: font-size 0.6s ease, flex-basis 0.6s ease;
-  }
-  header.nav-wide nav {
-    justify-content: flex-start;
-    max-width: 100%;
-    transition: max-width 0.6s ease, justify-content 0.6s ease;
-  }
+    .content-block h2 {
+      font-size: 50px;
+      text-transform: uppercase;
+      line-height: 1.6;
+      letter-spacing: 0.1em;
+    }
 
-  /* Header - Menü beim Scrollen: Logo sichtbar, Nav rechtsbündig und kleiner */
-  header.nav-narrow .logo {
-    font-size: 1.8rem;
-    flex-basis: auto;
-  }
-  header.nav-narrow nav {
-    justify-content: flex-end;
-    max-width: 70%;
-  }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.8rem;
+      background: #111;
+      color: #666;
+    }
 
-  footer {
-    text-align: center;
-    padding: 1rem;
-    font-size: 0.8rem;
-    background: #f0f0f0;
-    color: #666;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    user-select: none;
-  }
-</style>
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 32px;
+      }
+      nav {
+        font-size: 16px;
+        flex-wrap: wrap;
+      }
+      .content-block h2 {
+        font-size: 32px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="hero" id="hero">
+    <div class="background-img"></div>
+    <h1 id="title">TILL ESER</h1>
+    <nav id="mainNav">
+      <a href="index.html">Start</a>
+      <a href="design.html">Design</a>
+      <a href="cv.html">CV</a>
+      <a href="grafik.html">Grafik</a>
+      <a href="illustration.html">Illustration</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+  </div>
 
-<header id="pageHeader" class="nav-wide" aria-label="Hauptnavigation">
-  <div class="logo">TILL ESER</div>
-  <nav>
-    <a href="index.html">Start</a>
-    <a href="design.html">Design</a>
-    <a href="cv.html">CV</a>
-    <a href="grafik.html">Grafik</a>
-    <a href="illustration.html">Illustrations</a>
-    <a href="kontakt.html">Contact</a>
-  </nav>
-</header>
+  <div class="content-block">
+    <h2>
+      PRODUKT-,<br />
+      INDUSTRIAL-,<br />
+      INTEGRATED-,<br />
+      URBAN-,<br />
+      GRAFIKDESIGN
+    </h2>
+  </div>
 
-<div class="hero">
-  <h1 id="mainTitle">TILL ESER</h1>
-</div>
+  <footer>
+    © 2025 TILL ESER – Alle Rechte vorbehalten.
+  </footer>
 
-<footer>
-  © 2025 TILL ESER – Alle Rechte vorbehalten.
-</footer>
+  <script>
+    const hero = document.getElementById("hero");
+    const nav = document.getElementById("mainNav");
+    const title = document.getElementById("title");
 
-<script>
-  const header = document.getElementById('pageHeader');
-  const mainTitle = document.getElementById('mainTitle');
-  const triggerScroll = 50; // Scroll-Startpunkt
-
-  window.addEventListener('scroll', () => {
-    let scrollY = window.scrollY;
-
-    // Diagonal Bewegung berechnen (zwischen 0 und triggerScroll)
-    // Wir begrenzen scrollY für die Animation auf max triggerScroll (für glatte Animation)
-    let progress = Math.min(scrollY / triggerScroll, 1);
-
-    // Position und Größe des Titels interpolieren
-    // Start: top=50%, left=50%, fontSize=6rem
-    // Ende: top=15px, left=20px, fontSize=1.8rem
-
-    const startTopPercent = 50;
-    const startLeftPercent = 50;
-    const endTopPx = 15;
-    const endLeftPx = 20;
-    const startFontSize = 96; // 6rem = 96px approx
-    const endFontSize = 28.8; // 1.8rem = 28.8px approx
-
-    // Interpolieren top & left in px:
-    // Wir rechnen top & left in px aus viewport Höhe/Breite
-    const vh = window.innerHeight;
-    const vw = window.innerWidth;
-
-    // Start position in px
-    const startTopPx = vh * (startTopPercent / 100);
-    const startLeftPx = vw * (startLeftPercent / 100);
-
-    // Interpolierte Position:
-    const currentTop = startTopPx + progress * (endTopPx - startTopPx);
-    const currentLeft = startLeftPx + progress * (endLeftPx - startLeftPx);
-    const currentFontSize = startFontSize + progress * (endFontSize - startFontSize);
-
-    // Apply styles:
-    mainTitle.style.top = currentTop + "px";
-    mainTitle.style.left = currentLeft + "px";
-    mainTitle.style.fontSize = currentFontSize + "px";
-
-    // Menü Layout animieren:
-    if (progress === 1) {
-      // Am Ende: kleines Logo links + rechts bündig Menü
-      header.classList.remove('nav-wide');
-      header.classList.add('nav-narrow');
-    } else {
-      // Während Scrollen: Menü breit, Logo unsichtbar (font-size 0)
-      header.classList.remove('nav-narrow');
-      header.classList.add('nav-wide');
-    }
-  });
-</script>
-
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        hero.classList.add("shrink");
+        nav.classList.add("scroll");
+      } else {
+        hero.classList.remove("shrink");
+        nav.classList.remove("scroll");
+      }
+    });
+  </script>
 </body>
 </html>
+
 
