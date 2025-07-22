@@ -2,39 +2,41 @@ const heroTitle = document.querySelector('.hero-title');
 const scrollTexts = document.querySelectorAll('.scroll-text');
 const closeBtn = document.getElementById('closeBtn');
 
-const maxScrollForAnimation = 500; // Scrollbereich für Animation
+const maxScroll = 300; // Scrollbereich für Animationen
 
 window.addEventListener('scroll', () => {
-  const scrollPos = window.scrollY;
+  const scrollY = window.scrollY;
 
   // Menü und Titel anzeigen ab 50px Scroll
-  if (scrollPos > 50) {
+  if (scrollY > 50) {
     document.body.classList.add('scrolled');
   } else {
     document.body.classList.remove('scrolled');
   }
 
-  // TILL ESER nach links oben bewegen (nicht diagonal)
-  const scrollFactor = Math.min(scrollPos / maxScrollForAnimation, 1);
+  // TILL ESER bewegt sich nach links oben und wird kleiner
+  const progress = Math.min(scrollY / maxScroll, 1);
 
-  const shiftX = 80 * scrollFactor;  // 80px nach links
-  const shiftY = 80 * scrollFactor;  // 80px nach oben
-  const scale = 1 - 0.8 * scrollFactor;
+  const translateX = -progress * heroTitle.getBoundingClientRect().left; // bis ganz links (0)
+  const translateY = -progress * (heroTitle.getBoundingClientRect().top + window.scrollY); // bis ganz oben (0)
+  const scale = 1 - 0.6 * progress; // von 1 auf 0.4 skalieren
 
-  heroTitle.style.transform = `translate(${-shiftX}px, ${-shiftY}px) scale(${scale})`;
+  heroTitle.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
 
-  // Designwörter bewegen: links nach rechts oder rechts nach links bis Mitte
+  // Design-Schriftzüge schieben sich rein
   scrollTexts.forEach(el => {
-    const dir = el.getAttribute('data-direction');
-    const moveFactor = Math.min(scrollPos / maxScrollForAnimation, 1);
+    const direction = el.getAttribute('data-direction');
+    const baseOffset = 150; // Startposition außerhalb (in Prozent)
 
-    if (dir === 'ltr') {
-      // Von links nach Mitte (50%)
-      el.style.left = `${-100 + moveFactor * 150}%`;
+    let posPercent = baseOffset * (1 - progress);
+
+    if (direction === 'ltr') {
+      // Von links rein: left startet bei -150%, geht auf 0%
+      el.style.left = `${-posPercent}%`;
       el.style.right = 'auto';
     } else {
-      // Von rechts nach Mitte (50%)
-      el.style.right = `${-100 + moveFactor * 150}%`;
+      // Von rechts rein: right startet bei -150%, geht auf 0%
+      el.style.right = `${-posPercent}%`;
       el.style.left = 'auto';
     }
   });
