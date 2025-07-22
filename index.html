@@ -5,17 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TILL ESER – START</title>
   <style>
-    /* Grundsetup */
     body, html {
       margin: 0; padding: 0;
-      height: 200vh; /* genug für Scroll */
+      height: 200vh;
       background: #000;
       color: #fff;
       font-family: 'Helvetica Neue', sans-serif;
       overflow-x: hidden;
     }
 
-    /* Container für Schrift und Bild */
     .hero {
       position: relative;
       height: 100vh;
@@ -26,7 +24,6 @@
       padding: 0 2rem;
     }
 
-    /* Weißes Bild als Platzhalter */
     .hero img {
       position: absolute;
       right: 10%;
@@ -38,13 +35,12 @@
       transition: opacity 0.8s ease;
     }
 
-    /* Überschrift */
     h1 {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 8vw; /* responsive große Schrift */
+      font-size: 10vw; /* größer als vorher */
       font-weight: 900;
       letter-spacing: 0.25em;
       text-transform: uppercase;
@@ -58,20 +54,19 @@
       will-change: transform, top, left, font-size;
     }
 
-    /* Zustand beim Scroll: Schrift oben links */
+    /* Beim Scroll */
     h1.scrolled {
-      top: 2rem;
-      left: 2rem;
-      font-size: 2.5vw;
+      top: 10vh; /* etwas tiefer als ganz oben */
+      left: 2rem; /* ganz links mit kleinen Abstand */
+      font-size: 3vw;
       transform: translate(0, 0);
     }
 
-    /* Menü unten zentriert, erscheint beim scrollen */
     nav {
       position: fixed;
-      bottom: 30px;
       left: 50%;
-      transform: translateX(-50%);
+      bottom: 150px; /* Anfang: 15cm = ca 150px höher als vorher */
+      transform: translateX(-50%) translateY(50px);
       display: flex;
       gap: 2.5rem;
       opacity: 0;
@@ -79,14 +74,20 @@
       font-weight: 600;
       font-size: 1.2rem;
       text-transform: uppercase;
-      transition: opacity 0.6s ease;
+      transition: 
+        opacity 0.6s ease, 
+        transform 1s ease, 
+        bottom 1s ease;
       user-select: none;
       z-index: 10;
     }
 
+    /* Menü sichtbar */
     nav.visible {
       opacity: 1;
       pointer-events: auto;
+      bottom: 10vh; /* gleiche Höhe wie h1.scrolled (ca. 10vh) */
+      transform: translateX(-50%) translateY(0);
     }
 
     nav a {
@@ -101,7 +102,6 @@
       border-color: #ff5a5f;
     }
 
-    /* Footer */
     footer {
       text-align: center;
       padding: 1rem;
@@ -141,7 +141,7 @@
 
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
-      const triggerPoint = 100; // Wann die Animation starten soll
+      const triggerPoint = 100;
 
       if (scrollY > triggerPoint) {
         mainTitle.classList.add('scrolled');
@@ -154,4 +154,5 @@
   </script>
 </body>
 </html>
+
 
