@@ -1,39 +1,35 @@
-// Scroll-Animation für Titel + Menü
-window.addEventListener("scroll", () => {
-  const container = document.querySelector(".title-nav-container");
-  if (window.scrollY > 10) {
-    document.body.classList.add("scrolled");
-  } else {
-    document.body.classList.remove("scrolled");
+document.addEventListener("DOMContentLoaded", () => {
+  const titleNav = document.querySelector(".title-nav-container");
+  const navWrapper = document.querySelector(".nav-wrapper");
+  const scrollTexts = document.querySelectorAll(".scroll-text");
+
+  // === Scroll-Verhalten für TILL ESER + Menü ===
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
+
+    if (scrollTop > 50) {
+      titleNav.classList.add("scrolled");
+      navWrapper.classList.add("visible");
+    } else {
+      titleNav.classList.remove("scrolled");
+      navWrapper.classList.remove("visible");
+    }
+  });
+
+  // === Scroll-Animation der Begriffe (Index-Seite) ===
+  if (scrollTexts.length > 0) {
+    window.addEventListener("scroll", () => {
+      const maxOffset = 300; // bis zu welchem scrollY die Bewegung geht
+
+      scrollTexts.forEach((el, index) => {
+        const direction = el.dataset.direction === "rtl" ? -1 : 1;
+        const offset = Math.min(window.scrollY, maxOffset);
+        const move = (maxOffset - offset) * 0.5 * direction;
+
+        el.style.transform = `translateX(${move}px)`;
+      });
+    });
   }
 });
 
-// Texte mit Scroll einblenden
-const scrollTexts = document.querySelectorAll(".scroll-text");
-let triggered = [];
-
-function revealOnScroll() {
-  scrollTexts.forEach((text, i) => {
-    const rect = text.getBoundingClientRect();
-    const inMiddle = rect.top >= window.innerHeight / 3 && rect.top <= window.innerHeight * 2 / 3;
-    if (inMiddle && !triggered[i]) {
-      text.classList.add("visible");
-      triggered[i] = true;
-    }
-  });
-}
-
-window.addEventListener("scroll", revealOnScroll);
-
-window.addEventListener('scroll', () => {
-  const navWrapper = document.querySelector('.nav-wrapper');
-  const titleNav = document.querySelector('.title-nav-container');
-
-  if (window.scrollY > 50) {
-    navWrapper.classList.add('visible');
-    titleNav.classList.add('scrolled');
-  } else {
-    navWrapper.classList.remove('visible');
-    titleNav.classList.remove('scrolled');
-  }
 });
