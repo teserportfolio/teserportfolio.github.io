@@ -2,203 +2,160 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TILL ESER – Start</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TILL ESER – Portfolio</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       font-family: 'Helvetica Neue', sans-serif;
       background: #000;
       color: #fff;
       overflow-x: hidden;
     }
-
     .hero {
       position: relative;
       height: 100vh;
       width: 100%;
       overflow: hidden;
     }
-
-    .hero-image {
+    .hero img {
       position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      opacity: 0.9;
       z-index: -1;
     }
-
-    .title-nav-container {
-      position: absolute;
+    .title-container {
+      position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-      gap: 2rem;
-      transition: all 1.2s ease;
-    }
-
-    .hero-title {
       font-size: 8vw;
-      letter-spacing: 0.3em;
+      letter-spacing: 0.5em;
       text-transform: uppercase;
       transition: all 1.2s ease;
-      white-space: nowrap;
+      z-index: 10;
     }
-
-    .main-nav {
-      display: none;
-      flex-wrap: nowrap;
+    .nav-bar {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-wrap: wrap;
       gap: 2rem;
       text-transform: uppercase;
       font-size: 2vw;
-      font-weight: 600;
+      font-weight: bold;
+      justify-content: center;
       transition: all 1.2s ease;
-      white-space: nowrap;
+      opacity: 0;
     }
-
-    .main-nav a {
+    .nav-bar a {
       text-decoration: none;
-      color: #fff;
-      transition: color 0.3s;
+      color: white;
+      transition: 0.3s;
     }
-
-    .main-nav a:hover {
+    .nav-bar a:hover {
       color: #ff5a5f;
     }
-
-    .design-types {
-      margin-top: 100vh;
-      padding: 5rem 1rem;
-      font-size: 1rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
-      letter-spacing: 0.7em;
-      max-width: 100vw;
-    }
-
-    .design-line {
-      white-space: nowrap;
-      display: inline-block;
-      animation: scroll-left 40s linear infinite;
-    }
-
-    .design-line.reverse {
-      animation: scroll-right 40s linear infinite;
-    }
-
-    @keyframes scroll-left {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-
-    @keyframes scroll-right {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
-
-    /* SCROLLED STATE */
-    .scrolled .title-nav-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      transform: none;
-      background: #000;
-      padding: 1rem 2rem;
-      justify-content: space-between;
-      box-sizing: border-box;
-      z-index: 1000;
-      /* Wichtig: */
-      display: flex;
-      align-items: center;
-    }
-
-    .scrolled .hero-title {
-      font-size: 1.5rem;
-      text-align: left;
-      flex-shrink: 0;
-    }
-
-    .nav-plus-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-grow: 1;
-      justify-content: flex-end;
-    }
-
-    .scrolled .main-nav {
-      display: flex;
-      font-size: 1.5rem;
-      gap: 2rem;
-      white-space: nowrap;
-    }
-
     .close-btn {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
       font-size: 2rem;
       color: white;
       cursor: pointer;
-      transition: transform 0.3s ease;
-      user-select: none;
-      flex-shrink: 0;
-      /* entfernen position fixed, damit flexbox es steuert */
-      /* position: static; */
+      z-index: 100;
+      transition: transform 0.4s ease;
     }
-
     .close-btn:hover {
       transform: rotate(45deg);
+    }
+    .scrolled .title-container {
+      top: 1rem;
+      left: 2rem;
+      font-size: 2rem;
+      transform: none;
+    }
+    .scrolled .nav-bar {
+      top: 1.5rem;
+      left: auto;
+      right: 4rem;
+      transform: none;
+      opacity: 1;
+      font-size: 1.2rem;
+      justify-content: flex-end;
+    }
+    .design-section {
+      margin-top: 120vh;
+      padding: 10rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6rem;
+    }
+    .design-line {
+      font-size: 5vw;
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(100px);
+      transition: all 1s ease;
+    }
+    .design-line.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
+
   <div class="hero">
-    <img src="white-placeholder.jpg" alt="Placeholder" class="hero-image" />
-    <div class="title-nav-container">
-      <h1 class="hero-title">TILL ESER</h1>
-      <div class="nav-plus-wrapper">
-        <nav class="main-nav">
-          <a href="index.html">Start</a>
-          <a href="design.html">Design</a>
-          <a href="cv.html">CV</a>
-          <a href="grafik.html">Grafik & Illustration</a>
-          <a href="kontakt.html">Contact</a>
-        </nav>
-        <div class="close-btn" onclick="window.location.href='index.html'">+</div>
-      </div>
+    <img src="https://via.placeholder.com/1920x1080/ffffff/000000?text=Beispielbild" alt="White placeholder" />
+    <div class="title-container" id="title">TILL ESER</div>
+    <div class="nav-bar" id="nav">
+      <a href="index.html">Start</a>
+      <a href="design.html">Design</a>
+      <a href="cv.html">CV</a>
+      <a href="grafik.html">Grafik & Illustration</a>
+      <a href="kontakt.html">Contact</a>
     </div>
+    <div class="close-btn" onclick="window.location.href='index.html'">+</div>
   </div>
 
-  <section class="design-types">
-    <div class="design-line">PRODUKTDESIGN</div>
-    <div class="design-line reverse">INDUSTRIALDESIGN</div>
+  <section class="design-section">
+    <div class="design-line">INDUSTRIALDESIGN</div>
+    <div class="design-line">URBANDESIGN</div>
     <div class="design-line">INTEGRATEDDESIGN</div>
-    <div class="design-line reverse">URBANDESIGN</div>
+    <div class="design-line">PRODUKTDESIGN</div>
     <div class="design-line">GRAFIKDESIGN</div>
   </section>
 
   <script>
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
+      const scrollY = window.scrollY;
+      if (scrollY > 80) {
         document.body.classList.add('scrolled');
       } else {
         document.body.classList.remove('scrolled');
       }
+
+      const lines = document.querySelectorAll('.design-line');
+      lines.forEach((line, i) => {
+        const trigger = window.innerHeight * 0.6 + i * 150;
+        if (scrollY > trigger) {
+          line.classList.add('visible');
+        }
+      });
     });
   </script>
 </body>
