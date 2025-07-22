@@ -97,13 +97,12 @@
     }
 
     .close-btn {
-      position: absolute;
-      right: 2rem;
       font-size: 2rem;
       color: white;
       cursor: pointer;
       z-index: 1001;
       transition: transform 0.3s ease;
+      margin-left: 2rem;
     }
 
     .close-btn:hover {
@@ -116,7 +115,7 @@
       right: 2rem;
     }
 
-    /* Design-Schriften Marquee Animation */
+    /* Design-Schriften Animation */
     .design-types {
       padding: 5rem 0;
       display: flex;
@@ -130,12 +129,12 @@
       white-space: nowrap;
       overflow: hidden;
       position: relative;
-      font-size: 5vw;
-      font-weight: bold;
+      font-size: 12px;
+      font-weight: normal;
       text-transform: uppercase;
-      letter-spacing: 3vw;
+      letter-spacing: 5rem;
       color: #fff;
-      height: 7vw;
+      height: 3rem;
     }
 
     .marquee-content {
@@ -143,7 +142,7 @@
       position: absolute;
       white-space: nowrap;
       will-change: transform;
-      animation-duration: 20s;
+      animation-duration: 25s;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
     }
@@ -165,6 +164,11 @@
       0%   { transform: translateX(-100%); }
       100% { transform: translateX(100%); }
     }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+    }
   </style>
 </head>
 <body>
@@ -172,32 +176,34 @@
     <img src="white-placeholder.jpg" alt="Placeholder" class="hero-image" />
     <div class="title-nav-container">
       <h1 class="hero-title">TILL ESER</h1>
-      <nav class="main-nav">
-        <a href="index.html">Start</a>
-        <a href="design.html">Design</a>
-        <a href="cv.html">CV</a>
-        <a href="grafik.html">Grafik & Illustration</a>
-        <a href="kontakt.html">Contact</a>
-      </nav>
-      <div class="close-btn" onclick="window.location.href='index.html'">+</div>
+      <div class="nav-wrapper">
+        <nav class="main-nav">
+          <a href="index.html">Start</a>
+          <a href="design.html">Design</a>
+          <a href="cv.html">CV</a>
+          <a href="grafik.html">Grafik & Illustration</a>
+          <a href="kontakt.html">Contact</a>
+        </nav>
+        <div class="close-btn" onclick="window.location.href='index.html'">+</div>
+      </div>
     </div>
   </div>
 
   <section class="design-types">
     <div class="marquee-line marquee-left">
-      <div class="marquee-content">INDUSTRIALDESIGN INDUSTRIALDESIGN INDUSTRIALDESIGN</div>
+      <div class="marquee-content">I N D U S T R I A L D E S I G N</div>
     </div>
     <div class="marquee-line marquee-right">
-      <div class="marquee-content">URBANDESIGN URBANDESIGN URBANDESIGN</div>
+      <div class="marquee-content">U R B A N D E S I G N</div>
     </div>
     <div class="marquee-line marquee-left">
-      <div class="marquee-content">INTEGRATEDDESIGN INTEGRATEDDESIGN INTEGRATEDDESIGN</div>
+      <div class="marquee-content">I N T E G R A T E D D E S I G N</div>
     </div>
     <div class="marquee-line marquee-right">
-      <div class="marquee-content">PRODUKTDESIGN PRODUKTDESIGN PRODUKTDESIGN</div>
+      <div class="marquee-content">P R O D U K T D E S I G N</div>
     </div>
     <div class="marquee-line marquee-left">
-      <div class="marquee-content">GRAFIKDESIGN GRAFIKDESIGN GRAFIKDESIGN</div>
+      <div class="marquee-content">G R A F I K D E S I G N</div>
     </div>
   </section>
 
