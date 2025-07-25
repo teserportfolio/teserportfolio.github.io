@@ -1,47 +1,60 @@
+// Elements
 const titleNav = document.getElementById('titleNav');
 const heroTitle = document.getElementById('heroTitle');
-const mainNav = document.querySelector('.main-nav');
+const mainNav = document.getElementById('mainNav');
 const closeBtn = document.getElementById('closeBtn');
 const designSection = document.getElementById('designSection');
 const scrollTexts = designSection.querySelectorAll('.scroll-text');
 
-const maxScrollForAnimation = 300;
+let scrolled = false;
+let scrollPosition = 0;
 
+// Handle scroll: Title verschiebt sich nach links oben, Menü erscheint
+window.addEventListener('scroll', () => {
+  scrollPosition = window.scrollY;
+
+  if(scrollPosition > 50 && !scrolled) {
+    document.body.classList.add('scrolled');
+    scrolled = true;
+  } else if(scrollPosition <= 50 && scrolled) {
+    document.body.classList.remove('scrolled');
+    scrolled = false;
+  }
+
+  // Hero title bewegt sich diagonal nach links oben beim Scrollen (linear)
+  if(scrollPosition <= window.innerHeight) {
+    const maxShiftX = -window.innerWidth/2 + 30; // links mit etwas Rand
+    const maxShiftY = -window.innerHeight/2 + 30; // oben mit Rand
+    const progress = scrollPosition / window.innerHeight;
+
+    heroTitle.style.transform = `translate(${maxShiftX * progress}px, ${maxShiftY * progress}px) scale(${1 - 0.5 * progress})`;
+  }
+});
+
+// Plus-Button: klick zurück zur Startseite (index.html)
 closeBtn.addEventListener('click', () => {
   window.location.href = 'index.html';
 });
 
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
+// Scroll-Event für Design-Wörter, die sich reinschieben mit Mausrad
+let designScrollPos = 0;
 
-  if (scrollY > 50) {
-    document.body.classList.add('scrolled');
-  } else {
-    document.body.classList.remove('scrolled');
-  }
+window.addEventListener('wheel', (e) => {
+  // Nur auf index.html
+  if(!window.location.pathname.endsWith('index.html') && window.location.pathname !== '/') return;
 
-  // Titel bewegt sich progressiv nach links oben und skaliert
-  let progress = Math.min(scrollY / maxScrollForAnimation, 1);
+  designScrollPos += e.deltaY;
 
-  // Position und Skalierung Titel
-  const left = 50 - 49 * progress; // von 50% zu 1%
-  const top = 50 - 49 * progress;  // von 50% zu 1%
-  const scale = 1 - 0.5 * progress;  // von 1 zu 0.5
+  // Clamp scroll position für Design-Wörter (min 0 max 100)
+  if(designScrollPos < 0) designScrollPos = 0;
+  if(designScrollPos > 100) designScrollPos = 100;
 
-  titleNav.style.left = left + '%';
-  titleNav.style.top = top + '%';
-  titleNav.style.transform = `translate(-${left}%, -${top}%) scale(${scale})`;
-
-  // Design Texte bewegen sich von links/rechts rein
-  scrollTexts.forEach(text => {
-    let dir = text.getAttribute('data-direction');
-    if (scrollY < maxScrollForAnimation) {
-      let pos = dir === 'ltr' ? -150 + (150 * progress) : 150 - (150 * progress);
-      text.style.transform = `translateX(${pos}%)`;
-      text.style.opacity = progress;
+  // Zeige und verschiebe Design-Wörter abhängig vom scroll Wert
+  scrollTexts.forEach((text, i) => {
+    if(designScrollPos > i * 15) {
+      text.classList.add('visible');
     } else {
-      text.style.transform = `translateX(0)`;
-      text.style.opacity = 1;
+      text.classList.remove('visible');
     }
   });
 });
