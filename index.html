@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>TILL ESER – Start</title>
-<link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TILL ESER – Start</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <canvas id="drawCanvas"></canvas>
+
+  <header class="header">
+    <h1 class="hero-title" onclick="window.location.href='index.html'">TILL ESER</h1>
+    <nav class="main-nav">
+      <a href="design.html">DESIGN</a>
+      <a href="cv.html">CV</a>
+      <a href="grafik.html">GRAFIK & ILLUSTRATION</a>
+      <a href="kontakt.html">CONTACT</a>
+    </nav>
+    <div class="close-btn" id="closeBtn">+</div>
+  </header>
 
   <div class="hero">
-    <img src="dein-bild.jpg" alt="Background" class="hero-image" />
-    <div class="title-nav-container" id="titleNav">
-      <h1 class="hero-title" id="heroTitle">TILL ESER</h1>
-      <nav class="main-nav" id="mainNav">
-        <a href="design.html">DESIGN</a>
-        <a href="cv.html">CV</a>
-        <a href="grafik.html">GRAFIK & ILLUSTRATION</a>
-        <a href="kontakt.html">CONTACT</a>
-      </nav>
-      <div class="close-btn" id="closeBtn" title="Zurück zur Startseite">+</div>
-    </div>
+    <img src="dein-bild.jpg" alt="Placeholder" class="hero-image" />
   </div>
 
-  <div class="design-section" id="designSection">
+  <div class="design-section">
     <div class="scroll-text" data-direction="ltr">INDUSTRIALDESIGN</div>
     <div class="scroll-text" data-direction="rtl">URBANDESIGN</div>
     <div class="scroll-text" data-direction="ltr">INTEGRATEDDESIGN</div>
@@ -30,6 +32,6 @@
     <div class="scroll-text" data-direction="ltr">GRAFIKDESIGN</div>
   </div>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
