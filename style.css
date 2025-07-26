@@ -1,4 +1,3 @@
-/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -11,21 +10,18 @@ body {
   color: #fff;
   overflow-x: hidden;
   text-transform: uppercase;
-  user-select: none;
 }
 
 a {
   color: #fff;
   text-decoration: none;
   transition: color 0.3s ease;
-  white-space: nowrap;
 }
 
 a:hover {
   color: #ff5a5f;
 }
 
-/* HERO Bereich */
 .hero {
   position: relative;
   height: 100vh;
@@ -34,136 +30,95 @@ a:hover {
 
 .hero-image {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  opacity: 0.3; /* 30% sichtbar */
+  opacity: 0.3;
   z-index: -1;
+}
+
+.header {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.8s ease;
+  opacity: 0;
   pointer-events: none;
 }
 
-/* Container für Titel + Nav + + */
-.title-nav-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  transition: all 0.5s ease;
-  z-index: 10;
+.header.show {
+  top: 2%;
+  left: 2%;
+  transform: none;
+  justify-content: flex-start;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .hero-title {
   font-size: 10vw;
-  cursor: pointer;
   letter-spacing: 0.3em;
-  mix-blend-mode: difference; /* Negativ zum Bild */
-  white-space: nowrap;
-  transition: all 0.5s ease;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.8s ease;
 }
 
-/* Navigation - versteckt am Anfang */
+.header.show .hero-title {
+  font-size: 1.5rem;
+  margin-right: 2rem;
+}
+
 .main-nav {
-  display: none;
+  display: flex;
   gap: 2rem;
   font-weight: 600;
-  font-size: 1.6rem;
-}
-
-/* Plus Button */
-.close-btn {
-  font-size: 3rem;
-  cursor: pointer;
-  user-select: none;
-  transition: transform 0.3s ease;
-  color: #fff;
-  padding-left: 1rem;
-}
-
-.close-btn:hover {
-  transform: rotate(45deg);
-}
-
-/* Scroll State: Menü erscheint rechts oben, + daneben, Titel links oben */
-.scrolled .title-nav-container {
-  top: 1rem;
-  right: 1rem;
-  left: auto;
-  transform: translate(0, 0);
-  justify-content: flex-end;
-  width: auto;
-}
-
-.scrolled .hero-title {
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  font-size: 2.4rem;
-  letter-spacing: 0.15em;
-  mix-blend-mode: normal;
-  color: #fff;
-  transform: translate(0, 0);
-  cursor: pointer;
-  user-select: none;
-  transition: all 0.5s ease;
-  z-index: 15;
-}
-
-.scrolled .main-nav {
-  display: flex;
-}
-
-/* Design Section - unter dem Hero */
-.design-section {
-  position: relative;
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  user-select: none;
-}
-
-/* Design Worte (animiert) */
-.scroll-text {
-  font-size: 2rem;
-  font-weight: 600;
-  letter-spacing: 0.4em;
-  white-space: nowrap;
+  font-size: 1.5rem;
   opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.header.show .main-nav {
+  opacity: 1;
+}
+
+.close-btn {
+  font-size: 2rem;
+  margin-left: 2rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.header.show .close-btn {
+  opacity: 1;
+}
+
+.design-section {
+  margin-top: 120vh;
+  text-align: center;
+}
+
+.scroll-text {
+  font-size: 4rem;
+  white-space: nowrap;
+  margin: 2rem 0;
   transform: translateX(0);
-  transition: transform 0.5s ease, opacity 0.5s ease;
+  transition: transform 0.3s ease-out;
 }
 
-.scroll-text[data-direction="ltr"] {
-  transform: translateX(-150%);
-}
-
-.scroll-text[data-direction="rtl"] {
-  transform: translateX(150%);
-}
-
-/* Sichtbar wenn animiert */
-.visible {
-  opacity: 1 !important;
-  transform: translateX(0) !important;
-}
-
-/* Media Queries */
-@media (max-width: 600px) {
-  .hero-title {
-    font-size: 15vw;
-  }
-  .scrolled .hero-title {
-    font-size: 4vw;
-  }
-  .main-nav {
-    font-size: 1.2rem;
-  }
-  .close-btn {
-    font-size: 2rem;
-  }
+#drawCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
 }
