@@ -1,60 +1,72 @@
-// Elements
-const titleNav = document.getElementById('titleNav');
-const heroTitle = document.getElementById('heroTitle');
-const mainNav = document.getElementById('mainNav');
+const header = document.querySelector('.header');
+const heroTitle = document.querySelector('.hero-title');
+const nav = document.querySelector('.main-nav');
 const closeBtn = document.getElementById('closeBtn');
-const designSection = document.getElementById('designSection');
-const scrollTexts = designSection.querySelectorAll('.scroll-text');
+const scrollTexts = document.querySelectorAll('.scroll-text');
 
-let scrolled = false;
-let scrollPosition = 0;
-
-// Handle scroll: Title verschiebt sich nach links oben, Menü erscheint
 window.addEventListener('scroll', () => {
-  scrollPosition = window.scrollY;
+  const scrollY = window.scrollY;
 
-  if(scrollPosition > 50 && !scrolled) {
-    document.body.classList.add('scrolled');
-    scrolled = true;
-  } else if(scrollPosition <= 50 && scrolled) {
-    document.body.classList.remove('scrolled');
-    scrolled = false;
+  if (scrollY > window.innerHeight * 0.5) {
+    header.classList.add('show');
+  } else {
+    header.classList.remove('show');
   }
 
-  // Hero title bewegt sich diagonal nach links oben beim Scrollen (linear)
-  if(scrollPosition <= window.innerHeight) {
-    const maxShiftX = -window.innerWidth/2 + 30; // links mit etwas Rand
-    const maxShiftY = -window.innerHeight/2 + 30; // oben mit Rand
-    const progress = scrollPosition / window.innerHeight;
-
-    heroTitle.style.transform = `translate(${maxShiftX * progress}px, ${maxShiftY * progress}px) scale(${1 - 0.5 * progress})`;
-  }
-});
-
-// Plus-Button: klick zurück zur Startseite (index.html)
-closeBtn.addEventListener('click', () => {
-  window.location.href = 'index.html';
-});
-
-// Scroll-Event für Design-Wörter, die sich reinschieben mit Mausrad
-let designScrollPos = 0;
-
-window.addEventListener('wheel', (e) => {
-  // Nur auf index.html
-  if(!window.location.pathname.endsWith('index.html') && window.location.pathname !== '/') return;
-
-  designScrollPos += e.deltaY;
-
-  // Clamp scroll position für Design-Wörter (min 0 max 100)
-  if(designScrollPos < 0) designScrollPos = 0;
-  if(designScrollPos > 100) designScrollPos = 100;
-
-  // Zeige und verschiebe Design-Wörter abhängig vom scroll Wert
-  scrollTexts.forEach((text, i) => {
-    if(designScrollPos > i * 15) {
-      text.classList.add('visible');
-    } else {
-      text.classList.remove('visible');
-    }
+  // Animate Design Texts
+  scrollTexts.forEach((text, index) => {
+    let direction = text.dataset.direction === 'ltr' ? 1 : -1;
+    let moveAmount = Math.min(scrollY * 0.3 * direction, window.innerWidth / 2 - 100);
+    text.style.transform = `translateX(${moveAmount}px)`;
   });
+});
+
+// Canvas Drawing
+const canvas = document.getElementById('drawCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let drawing = false;
+let lastX = 0;
+let lastY = 0;
+
+function startDrawing(e) {
+  drawing = true;
+  [lastX, lastY] = [e.clientX, e.clientY];
+  canvas.style.pointerEvents = 'auto';
+}
+
+function stopDrawing() {
+  drawing = false;
+  ctx.beginPath();
+  canvas.style.pointerEvents = 'none';
+}
+
+function draw(e) {
+  if (!drawing) return;
+
+  ctx.lineWidth = 2;
+  ctx.lineCap = 'round';
+  ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+  ctx.shadowColor = 'white';
+  ctx.shadowBlur = 2;
+
+  ctx.beginPath();
+  ctx.moveTo(lastX, lastY);
+  ctx.lineTo(e.clientX, e.clientY);
+  ctx.stroke();
+
+  [lastX, lastY] = [e.clientX, e.clientY];
+}
+
+canvas.addEventListener('mousedown', startDrawing);
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', stopDrawing);
+canvas.addEventListener('mouseleave', stopDrawing);
+
+// Reset Canvas on "+" Click
+closeBtn.addEventListener('click', () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  window.location.href = 'index.html';
 });
