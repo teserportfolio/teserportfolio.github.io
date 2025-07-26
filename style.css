@@ -39,35 +39,32 @@ a:hover {
   z-index: -1;
 }
 
+/* Header und Menü */
 .header {
   position: fixed;
-  top: 10%;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
+  transform: translate(-50%, -50%);
   display: flex;
-  justify-content: center;
   align-items: center;
-  transition: all 0.8s ease;
-  opacity: 0;
-  pointer-events: none;
+  flex-direction: column;
+  transition: all 1s ease;
+  z-index: 10;
 }
 
 .header.show {
   top: 2%;
   left: 2%;
   transform: none;
+  flex-direction: row;
   justify-content: flex-start;
-  opacity: 1;
-  pointer-events: auto;
 }
 
 .hero-title {
-  font-size: 10vw;
+  font-size: 8vw;
   letter-spacing: 0.3em;
   cursor: pointer;
-  user-select: none;
-  transition: all 0.8s ease;
+  transition: all 1s ease;
 }
 
 .header.show .hero-title {
@@ -76,49 +73,64 @@ a:hover {
 }
 
 .main-nav {
-  display: flex;
-  gap: 2rem;
-  font-weight: 600;
-  font-size: 1.5rem;
-  opacity: 0;
-  transition: opacity 0.5s ease;
+  display: none;
+  gap: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .header.show .main-nav {
-  opacity: 1;
+  display: flex;
 }
 
 .close-btn {
   font-size: 2rem;
-  margin-left: 2rem;
+  margin-left: 1.5rem;
   cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.5s ease;
+  display: none;
 }
 
 .header.show .close-btn {
+  display: block;
+}
+
+/* Design Texte */
+.design-text-container {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.show-texts .design-text-container {
   opacity: 1;
 }
 
-.design-section {
-  margin-top: 120vh;
-  text-align: center;
+.design-text {
+  font-size: 3rem;
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: all 0.8s ease;
 }
 
-.scroll-text {
-  font-size: 4rem;
-  white-space: nowrap;
-  margin: 2rem 0;
+.show-texts .design-text {
   transform: translateX(0);
-  transition: transform 0.3s ease-out;
+  opacity: 1;
 }
 
-#drawCanvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 5;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
+/* Buchstaben Animation beim Scrollen */
+.disappear .design-text span {
+  display: inline-block;
+  transform: translateY(0);
+  opacity: 1;
+  transition: all 0.8s ease;
+}
+
+.disappear .design-text span.hide {
+  transform: translateY(-100px) scale(1.5);
+  opacity: 0;
 }
