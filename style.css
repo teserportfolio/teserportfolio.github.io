@@ -1,0 +1,8 @@
+body { margin: 0; background: black; color: white; font-family: sans-serif; overflow-x: hidden; }
+.hero { position: relative; height: 100vh; overflow: hidden; }
+.hero-image { position: absolute; top: 0; left: 0; width: 100%; height: 30%; object-fit: cover; opacity: 0.3; }
+#hero-title { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 8vw; cursor: pointer; transition: all 1s ease; }
+.nav { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); display: flex; gap: 2rem; font-size: 1.2rem; transition: top 0.5s ease; }
+.nav a, #reset-btn { color: white; cursor: pointer; }
+.scroll-text { position: relative; white-space: nowrap; font-size: 2rem; }
+.active { color: yellow !important; }
