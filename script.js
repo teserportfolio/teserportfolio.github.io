@@ -14,3 +14,12 @@ window.addEventListener('scroll', () => {
 document.getElementById('resetBtn').addEventListener('click', () => {
   location.reload();  // Seite neu laden (reset)
 });
+// Aktive Seite im Menü markieren
+const menuLinks = document.querySelectorAll('#main-menu a');
+const currentPage = window.location.pathname.split('/').pop();
+
+menuLinks.forEach(link => {
+  if (link.getAttribute('href') === currentPage) {
+    link.classList.add('active');
+  }
+});
