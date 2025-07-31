@@ -23,3 +23,10 @@ menuLinks.forEach(link => {
     link.classList.add('active');
   }
 });
+const menuToggle = document.getElementById('menuToggle');
+
+menuToggle.addEventListener('click', () => {
+  menuToggle.classList.toggle('open');
+  // Hier könntest du ein Menü öffnen oder Seiten resetten
+  // z.B. location.reload(); falls du Seite refreshen willst
+});
