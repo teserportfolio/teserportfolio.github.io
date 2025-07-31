@@ -1,4 +1,3 @@
-/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -8,90 +7,75 @@
 body {
   background: #000;
   color: #fff;
-  font-family: 'Helvetica Neue', sans-serif;
+  height: 200vh; /* Zum Scrollen */
+  font-family: Arial, sans-serif;
   overflow-x: hidden;
 }
 
-.hero {
-  position: relative;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.hero-bg {
-  position: absolute;
+header {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.3;
-  z-index: -1;
-}
-
-.hero-title {
-  font-size: 10vw;
-  text-transform: uppercase;
-  transition: all 1s ease;
-}
-
-.main-header {
-  position: fixed;
-  top: -100px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 2rem;
-  opacity: 0;
-  transition: all 1s ease;
+  padding: 2rem;
   z-index: 10;
 }
 
-.main-nav {
-  display: flex;
-  gap: 2rem;
+#logo {
+  font-size: 8vw;
+  transition: all 0.5s ease;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.main-nav a {
+#mainNav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  position: absolute;
+  top: -100px;
+  right: 2rem;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+#mainNav a {
   text-decoration: none;
-  color: white;
-  font-size: 1.2rem;
+  color: #fff;
   padding: 0.5rem 1rem;
-  border: 2px solid transparent;
   transition: all 0.3s ease;
 }
 
-.main-nav a:hover {
-  background: white;
-  color: black;
-  border: 2px solid white;
+#mainNav a:hover {
+  background: #fff;
+  color: #000;
 }
 
-.menu-toggle {
+#toggleBtn {
   font-size: 2rem;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  user-select: none;
+  transition: transform 0.5s ease;
 }
 
-.menu-toggle.open {
-  transform: rotate(45deg);
-}
-
-/* Active state after scroll */
-.scrolled .hero-title {
-  position: fixed;
-  top: 20px;
-  left: 20px;
+/* SCROLLED STATE */
+.scrolled #logo {
   font-size: 2rem;
+  top: 2rem;
+  left: 2rem;
+  transform: translate(0, 0);
 }
 
-.scrolled .main-header {
-  top: 20px;
+.scrolled #mainNav {
+  top: 2rem;
   opacity: 1;
+}
+
+.scrolled #toggleBtn {
+  transform: rotate(45deg);
 }
