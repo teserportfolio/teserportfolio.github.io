@@ -1,4 +1,3 @@
-/* Reset & Basics */
 * {
   margin: 0;
   padding: 0;
@@ -6,190 +5,13 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #000;
-  color: #fff;
+  font-family: 'Helvetica Neue', sans-serif;
+  background: black;
+  color: white;
   overflow-x: hidden;
 }
 
-/* Header */
-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  z-index: 10;
-}
-
-#logo {
-  font-size: 2rem;
-  cursor: pointer;
-}
-
-#main-menu {
-  display: flex;
-  gap: 20px;
-}
-
-#resetBtn {
-  cursor: pointer;
-  font-size: 2rem;
-}
-
-/* Hero Section */
-.hero {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.background-image {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.3;
-  z-index: -1;
-}
-
-.scroll-text {
-  font-size: 5rem;
-  text-transform: uppercase;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  white-space: nowrap;
-  transition: all 1s ease;
-}
-
-/* Animation sichtbar nach Scroll */
-.scrolled .scroll-text {
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.scrolled #logo {
-  transform: translate(0, -50%) scale(0.7);
-  position: fixed;
-  top: 10px;
-  left: 20px;
-}
-/* Glanz-Effekt beim Hover */
-#main-menu a {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-  color: white;
-}
-
-#main-menu a::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, yellow, transparent);
-  transition: left 0.5s;
-  z-index: 1;
-}
-
-#main-menu a:hover::before {
-  left: 100%;
-}
-
-/* Text bleibt gelb wenn aktiv */
-#main-menu a.active {
-  color: yellow;
-}
-/* Basis Styles für Menü-Links */
-#main-menu a {
-  color: white;
-  text-decoration: none;
-  font-size: 1.2rem;
-  position: relative;
-  overflow: hidden;
-  padding: 0.5rem 1rem;
-  display: inline-block;
-  transition: color 0.3s ease;
-}
-
-/* Unterstrich entfernen */
-#main-menu a:hover {
-  text-decoration: none;
-}
-
-/* Glanz-Effekt */
-#main-menu a::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, yellow, transparent);
-  transition: left 0.5s;
-  z-index: 1;
-}
-
-#main-menu a:hover::before {
-  left: 100%;
-}
-
-/* Aktive Seite im Menü */
-#main-menu a.active {
-  color: yellow;
-}
-/* Menü Links – Standard Design */
-#main-menu {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-}
-
-#main-menu a {
-  color: white;
-  text-decoration: none;
-  font-size: 1.2rem;
-  position: relative;
-  overflow: hidden;
-  padding: 0.5rem 1rem;
-  display: inline-block;
-}
-
-/* Hover Glanz Effekt */
-#main-menu a::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, yellow, transparent);
-  transition: left 0.5s ease;
-}
-
-#main-menu a:hover::before {
-  left: 100%;
-}
-
-/* Aktive Seite Gelb */
-#main-menu a.active {
-  color: yellow;
-}
-/* Header Layout */
+/* HEADER Layout */
 .header {
   position: fixed;
   top: 20px;
@@ -204,11 +26,10 @@ header {
 /* TILL ESER */
 .site-title {
   font-size: 2rem;
-  color: white;
   cursor: pointer;
 }
 
-/* Menü */
+/* MENU */
 #main-menu {
   display: flex;
   gap: 2rem;
@@ -221,7 +42,7 @@ header {
   position: relative;
 }
 
-/* Glanz Effekt in Text */
+/* Glanzeffekt */
 #main-menu a::after {
   content: '';
   position: absolute;
@@ -238,7 +59,7 @@ header {
   left: 100%;
 }
 
-/* Aktiver Menüpunkt */
+/* Active Page */
 #main-menu a.active {
   color: yellow;
 }
@@ -246,7 +67,6 @@ header {
 /* + Button */
 .menu-toggle {
   font-size: 2rem;
-  color: white;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
@@ -256,3 +76,34 @@ header {
   transform: rotate(45deg);
 }
 
+/* HERO IMAGE */
+.hero-image {
+  width: 100%;
+  height: 30vh;
+  background: url('Firefly_backround.jpg') no-repeat center center/cover;
+  opacity: 0.3;
+}
+
+/* SCROLL-TEXTS */
+.scroll-texts {
+  margin-top: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3rem;
+  padding-left: 5vw;
+}
+
+.scroll-text {
+  font-size: 4rem;
+  font-weight: 300;
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 1s ease;
+}
+
+/* Visible when in viewport */
+.scroll-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
