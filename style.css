@@ -32,8 +32,9 @@ header {
   font-size: 8vw;
   font-weight: bold;
   transition: all 1s ease;
-  .site-title {
-  text-transform: uppercase; /* Macht den Text komplett groß */
+  text-transform: uppercase; /* Hier der neue Teil */
+}
+
 }
 
 }
