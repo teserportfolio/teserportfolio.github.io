@@ -27,11 +27,15 @@ header {
   z-index: 1000;
 }
 
-/* Till Eser groß und fett am Anfang */
+/* TILL ESER groß und fett am Anfang */
 .site-title {
-  font-size: 10vw;
+  font-size: 8vw;
   font-weight: bold;
   transition: all 1s ease;
+  .site-title {
+  text-transform: uppercase; /* Macht den Text komplett groß */
+}
+
 }
 
 /* Menü unsichtbar am Anfang */
