@@ -5,7 +5,7 @@
 }
 
 body {
-  background: #000;
+  background-color: #000;
   color: #fff;
   font-family: 'Helvetica Neue', sans-serif;
   overflow-x: hidden;
@@ -13,9 +13,9 @@ body {
 
 header {
   position: fixed;
+  width: 100%;
   top: 0;
   left: 0;
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,6 +26,7 @@ header {
 
 .site-title {
   font-size: 10vw;
+  font-weight: bold;
   transition: all 1s ease;
   pointer-events: auto;
 }
@@ -43,29 +44,31 @@ header {
   color: #fff;
   text-decoration: none;
   font-size: 1.5rem;
-  position: relative;
   transition: all 0.3s ease;
+  border: 1px solid transparent;
+  padding: 0.2em 0.5em;
 }
 
 .main-nav a:hover {
   color: #000;
   background: #fff;
-  padding: 0.2em 0.5em;
+  border: 1px solid #fff;
 }
 
 .menu-toggle {
   font-size: 2rem;
   cursor: pointer;
   opacity: 0;
-  transform: translateY(-50px);
-  transition: all 1s ease;
+  transform: translateY(-50px) rotate(0deg);
+  transition: all 1s ease, transform 0.5s ease;
   pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Scroll effect active */
 .scrolled .site-title {
   font-size: 2rem;
-  transform: translateY(0) translateX(0);
   position: absolute;
   top: 2rem;
   left: 2rem;
@@ -82,10 +85,14 @@ header {
 
 .scrolled .menu-toggle {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) rotate(0deg);
   position: absolute;
   top: 2rem;
   right: 2rem;
+}
+
+.menu-toggle.active {
+  transform: translateY(0) rotate(45deg);
 }
 
 .spacer {
