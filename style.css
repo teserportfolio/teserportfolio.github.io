@@ -1,0 +1,97 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  font-family: 'Helvetica Neue', sans-serif;
+  overflow-x: hidden;
+}
+
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.hero-title {
+  font-size: 10vw;
+  text-transform: uppercase;
+  transition: all 1s ease;
+}
+
+.main-header {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  opacity: 0;
+  transition: all 1s ease;
+  z-index: 10;
+}
+
+.main-nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.main-nav a:hover {
+  background: white;
+  color: black;
+  border: 2px solid white;
+}
+
+.menu-toggle {
+  font-size: 2rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.menu-toggle.open {
+  transform: rotate(45deg);
+}
+
+/* Active state after scroll */
+.scrolled .hero-title {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 2rem;
+}
+
+.scrolled .main-header {
+  top: 20px;
+  opacity: 1;
+}
