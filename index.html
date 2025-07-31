@@ -1,150 +1,27 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Till Eser Portfolio</title>
-<style>
-  /* Reset & Grund */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  body {
-    background-color: #000;
-    color: #fff;
-    font-family: 'Helvetica Neue', sans-serif;
-    overflow-x: hidden;
-    height: 200vh; /* scrollen möglich */
-  }
-  header {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: all 1s ease;
-    z-index: 1000;
-  }
-  .site-title {
-    font-size: 10vw;
-    font-weight: bold;
-    transition: all 1s ease;
-  }
-  .main-nav {
-    display: flex;
-    gap: 2rem;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 1s ease;
-    position: absolute;
-    top: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .main-nav a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.5rem;
-    border: 1px solid transparent;
-    padding: 0.2em 0.5em;
-    transition: all 0.3s ease;
-  }
-  .main-nav a:hover {
-    color: #000;
-    background: #fff;
-    border: 1px solid #fff;
-  }
-  .menu-toggle {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: auto;
-    transition: transform 0.5s ease;
-  }
-  .menu-toggle span {
-    position: absolute;
-    display: block;
-    width: 20px;
-    height: 2px;
-    background-color: #fff;
-    transition: all 0.5s ease;
-  }
-  .menu-toggle span:nth-child(1) {
-    transform: rotate(0deg);
-  }
-  .menu-toggle span:nth-child(2) {
-    transform: rotate(90deg);
-  }
-  .menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg);
-  }
-  .menu-toggle.active span:nth-child(2) {
-    transform: rotate(-45deg);
-  }
-  header.scrolled {
-    height: auto;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 1rem 2rem;
-  }
-  header.scrolled .site-title {
-    font-size: 2rem;
-    font-weight: bold;
-    position: static;
-    margin-right: 2rem;
-  }
-  header.scrolled .main-nav {
-    opacity: 1;
-    pointer-events: auto;
-    position: static;
-    transform: none;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header>
+    <h1 class="site-title">TILL ESER</h1>
+    <nav class="main-nav">
+      <a href="CV.html">CV</a>
+      <a href="DESIGN.html">DESIGN</a>
+      <a href="GRAFIK.html">GRAFIK</a>
+    </nav>
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+    </div>
+  </header>
 
-<header>
-  <h1 class="site-title">Till Eser</h1>
-  <nav class="main-nav">
-    <a href="#">HOME</a>
-    <a href="#">DESIGN</a>
-    <a href="#">CV</a>
-  </nav>
-  <div class="menu-toggle" id="menuToggle">
-    <span></span>
-    <span></span>
-  </div>
-</header>
+  <div class="spacer"></div>
 
-<script>
-  const header = document.querySelector('header');
-  const menuToggle = document.getElementById('menuToggle');
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  });
-
-  menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-  });
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
