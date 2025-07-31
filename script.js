@@ -1,9 +1,7 @@
-window.addEventListener('scroll', () => {
-  const header = document.getElementById('header');
-  const siteTitle = document.getElementById('siteTitle');
-  const mainNav = document.getElementById('mainNav');
-  const menuToggle = document.getElementById('menuToggle');
+const header = document.querySelector('header');
+const menuToggle = document.getElementById('menuToggle');
 
+window.addEventListener('scroll', () => {
   if (window.scrollY > 50) {
     header.classList.add('scrolled');
   } else {
@@ -11,7 +9,6 @@ window.addEventListener('scroll', () => {
   }
 });
 
-document.getElementById('menuToggle').addEventListener('click', () => {
-  const menuToggle = document.getElementById('menuToggle');
+menuToggle.addEventListener('click', () => {
   menuToggle.classList.toggle('active');
 });
