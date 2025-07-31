@@ -1,11 +1,13 @@
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 100) {
-    document.body.classList.add('scrolled');
+  const header = document.querySelector('header');
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
   } else {
-    document.body.classList.remove('scrolled');
+    header.classList.remove('scrolled');
   }
 });
 
-document.getElementById('toggleBtn').addEventListener('click', () => {
-  alert('Hier kannst du Seiten schließen.');
+document.getElementById('menuToggle').addEventListener('click', () => {
+  const menuToggle = document.getElementById('menuToggle');
+  menuToggle.textContent = menuToggle.textContent === '+' ? 'X' : '+';
 });
