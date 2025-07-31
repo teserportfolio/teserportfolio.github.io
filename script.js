@@ -1,32 +1,19 @@
-// Scroll-Effekt für Schrift
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  const hero = document.querySelector('.hero');
-  
-  if(scrollY > hero.offsetHeight / 2){
-    document.body.classList.add('scrolled');
-  } else {
-    document.body.classList.remove('scrolled');
-  }
-});
-
-// Reset Button Funktion
-document.getElementById('resetBtn').addEventListener('click', () => {
-  location.reload();  // Seite neu laden (reset)
-});
-// Aktive Seite im Menü markieren
-const menuLinks = document.querySelectorAll('#main-menu a');
-const currentPage = window.location.pathname.split('/').pop();
-
-menuLinks.forEach(link => {
-  if (link.getAttribute('href') === currentPage) {
-    link.classList.add('active');
-  }
-});
 const menuToggle = document.getElementById('menuToggle');
+const scrollTexts = document.querySelectorAll('.scroll-text');
 
+// Toggle + to X
 menuToggle.addEventListener('click', () => {
   menuToggle.classList.toggle('open');
-  // Hier könntest du ein Menü öffnen oder Seiten resetten
-  // z.B. location.reload(); falls du Seite refreshen willst
+  // Optional: Reset drawings or open menu
+});
+
+// Scroll Animation for Texts
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY + window.innerHeight;
+
+  scrollTexts.forEach(text => {
+    if (scrollY > text.offsetTop + 100) {
+      text.classList.add('visible');
+    }
+  });
 });
