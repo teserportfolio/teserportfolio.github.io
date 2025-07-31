@@ -1,19 +1,8 @@
-const menuToggle = document.getElementById('menuToggle');
-let menuOpen = false;
-
-menuToggle.addEventListener('click', () => {
-  menuOpen = !menuOpen;
-  if (menuOpen) {
-    menuToggle.classList.add('open');
-  } else {
-    menuToggle.classList.remove('open');
-  }
-});
-
 window.addEventListener('scroll', () => {
+  const header = document.querySelector('header');
   if (window.scrollY > 100) {
-    document.body.classList.add('scrolled');
+    header.classList.add('scrolled');
   } else {
-    document.body.classList.remove('scrolled');
+    header.classList.remove('scrolled');
   }
 });
