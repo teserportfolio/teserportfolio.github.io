@@ -9,5 +9,5 @@ window.addEventListener('scroll', () => {
 
 document.getElementById('menuToggle').addEventListener('click', () => {
   const menuToggle = document.getElementById('menuToggle');
-  menuToggle.textContent = menuToggle.textContent === '+' ? 'X' : '+';
+  menuToggle.classList.toggle('active');
 });
