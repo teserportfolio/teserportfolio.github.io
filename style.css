@@ -75,33 +75,34 @@ header {
   width: 30px;
   height: 30px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
+  z-index: 3000;
 }
 
-.menu-toggle span {
+.menu-toggle .bar1,
+.menu-toggle .bar2 {
   position: absolute;
-  display: block;
   width: 30px;
   height: 3px;
   background-color: #fff;
   transition: all 0.5s ease;
 }
 
-.menu-toggle span:nth-child(1) {
-  transform: rotate(0deg);
+.menu-toggle .bar1 {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
 }
 
-.menu-toggle span:nth-child(2) {
-  transform: rotate(90deg);
+.menu-toggle .bar2 {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%) rotate(90deg);
 }
 
-.menu-toggle.active span:nth-child(1) {
-  transform: rotate(45deg);
+.menu-toggle.active .bar1 {
+  transform: translateY(-50%) rotate(45deg);
 }
 
-.menu-toggle.active span:nth-child(2) {
-  transform: rotate(-45deg);
+.menu-toggle.active .bar2 {
+  transform: translateY(-50%) rotate(-45deg);
 }
