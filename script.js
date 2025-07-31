@@ -1,8 +1,11 @@
 window.addEventListener('scroll', () => {
-  const header = document.querySelector('header');
   if (window.scrollY > 100) {
-    header.classList.add('scrolled');
+    document.body.classList.add('scrolled');
   } else {
-    header.classList.remove('scrolled');
+    document.body.classList.remove('scrolled');
   }
+});
+
+document.getElementById('toggleBtn').addEventListener('click', () => {
+  alert('Hier kannst du Seiten schließen.');
 });
