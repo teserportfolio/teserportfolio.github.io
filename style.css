@@ -1,16 +1,18 @@
+/* Reset & Grund */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   background-color: #000;
   color: #fff;
   font-family: 'Helvetica Neue', sans-serif;
   overflow-x: hidden;
+  height: 200vh; /* Damit man scrollen kann */
 }
 
+/* Header Anfangsmitte */
 header {
   position: fixed;
   width: 100%;
@@ -25,12 +27,14 @@ header {
   z-index: 1000;
 }
 
+/* Till Eser groß und fett am Anfang */
 .site-title {
   font-size: 10vw;
   font-weight: bold;
   transition: all 1s ease;
 }
 
+/* Menü unsichtbar am Anfang */
 .main-nav {
   display: flex;
   gap: 2rem;
@@ -52,64 +56,14 @@ header {
   transition: all 0.3s ease;
 }
 
+/* Hover Effekt: weißer Rahmen und schwarze Schrift */
 .main-nav a:hover {
   color: #000;
   background: #fff;
   border: 1px solid #fff;
 }
 
-.menu-toggle {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  pointer-events: none;
-}
-
-.menu-toggle span {
-  display: block;
-  width: 100%;
-  height: 3px;
-  background-color: #fff;
-  margin: 6px 0;
-  transition: all 0.5s ease;
-}
-
-header.scrolled {
-  height: auto;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 2rem;
-}
-
-header.scrolled .site-title {
-  font-size: 2rem;
-  position: static;
-}
-
-header.scrolled .main-nav {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-header.scrolled .menu-toggle {
-  pointer-events: auto;
-}
-
-.menu-toggle.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-.menu-toggle.active span:nth-child(2) {
-  transform: rotate(-45deg) translate(6px, -6px);
-}
-
-.spacer {
-  height: 200vh; /* Platz zum Scrollen */
-}
+/* Menü Toggle (+) rechts oben */
 .menu-toggle {
   position: absolute;
   top: 2rem;
@@ -120,8 +74,11 @@ header.scrolled .menu-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: auto;
+  transition: transform 0.5s ease;
 }
 
+/* Die 2 Balken des "+" */
 .menu-toggle span {
   position: absolute;
   display: block;
@@ -131,6 +88,7 @@ header.scrolled .menu-toggle {
   transition: all 0.5s ease;
 }
 
+/* Balken im + Kreuz (horizontal und vertikal) */
 .menu-toggle span:nth-child(1) {
   transform: rotate(0deg);
 }
@@ -139,6 +97,7 @@ header.scrolled .menu-toggle {
   transform: rotate(90deg);
 }
 
+/* Animation + wird zum X */
 .menu-toggle.active span:nth-child(1) {
   transform: rotate(45deg);
 }
@@ -147,3 +106,32 @@ header.scrolled .menu-toggle {
   transform: rotate(-45deg);
 }
 
+/* Wenn gescrollt, Header oben links & Menü sichtbar */
+header.scrolled {
+  height: auto;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem 2rem;
+}
+
+/* Schriftgröße von Till Eser beim Scrollen kleiner und links */
+header.scrolled .site-title {
+  font-size: 2rem;
+  font-weight: bold;
+  position: static;
+  margin-right: 2rem;
+}
+
+/* Menü sichtbar beim Scrollen */
+header.scrolled .main-nav {
+  opacity: 1;
+  pointer-events: auto;
+  position: static;
+  transform: none;
+}
+
+/* Spacer für Scroll */
+.spacer {
+  height: 150vh;
+}
