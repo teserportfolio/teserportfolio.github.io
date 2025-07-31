@@ -11,7 +11,7 @@ body {
   color: #fff;
   font-family: 'Helvetica Neue', sans-serif;
   overflow-x: hidden;
-  height: 200vh; /* genug Höhe für Scroll */
+  height: 200vh; /* Platz zum Scrollen */
 }
 
 /* Header */
@@ -21,92 +21,97 @@ header {
   height: 100vh;
   top: 0;
   left: 0;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   transition: all 1s ease;
   z-index: 1000;
 }
 
-/* Titel: TILL ESER */
+/* Titel: TILL ESER, immer Großbuchstaben */
 .site-title {
   font-size: 10vw;
   font-weight: bold;
+  text-transform: uppercase;
   transition: all 1s ease;
-  text-transform: uppercase; /* Großbuchstaben */
+  user-select: none;
 }
 
-/* Navigation Menü */
+/* Menü Navigation */
 .main-nav {
   display: flex;
   gap: 2rem;
   opacity: 0;
   pointer-events: none;
-  transition: all 1s ease;
   position: absolute;
   top: 2rem;
   left: 50%;
   transform: translateX(-50%);
+  transition: opacity 1s ease;
 }
 
-/* Menü Links */
+/* Links im Menü */
 .main-nav a {
   color: #fff;
   text-decoration: none;
   font-size: 1.5rem;
-  border: 1px solid transparent;
   padding: 0.2em 0.5em;
+  border: 1px solid transparent;
   transition: all 0.3s ease;
+  user-select: none;
 }
 
-/* Hover Effekt auf Menü Links */
+/* Hover Effekt - weißer Rahmen, Schrift schwarz */
 .main-nav a:hover {
   color: #000;
-  background: #fff;
+  background-color: #fff;
   border: 1px solid #fff;
 }
 
-/* Menü beim Scrollen sichtbar */
+/* Header wenn gescrollt */
 header.scrolled {
   height: auto;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 1rem 2rem;
 }
 
-/* Titel kleiner und nach links oben verschieben */
+/* TILL ESER nach links oben verkleinert */
 header.scrolled .site-title {
   font-size: 2rem;
-  position: static;
-  transform: translateX(0) translateY(0);
+  position: relative;
+  margin-right: 2rem;
 }
 
-/* Menü sichtbar und interaktiv */
+/* Menü sichtbar und mittig oben */
 header.scrolled .main-nav {
   opacity: 1;
   pointer-events: auto;
-  position: static;
+  position: relative;
+  top: auto;
+  left: auto;
   transform: none;
 }
 
-/* Menü-Toggle Button (Plus / X) */
+/* Menü-Button + in der rechten oberen Ecke */
 .menu-toggle {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
   width: 30px;
   height: 30px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none; /* initially disabled */
-  transition: transform 0.5s ease;
+  z-index: 2000;
 }
 
-/* Balken des Plus / X */
+/* Balken des Plus */
 .menu-toggle span {
   position: absolute;
   display: block;
@@ -114,6 +119,7 @@ header.scrolled .main-nav {
   height: 2px;
   background-color: #fff;
   transition: all 0.5s ease;
+  border-radius: 1px;
 }
 
 .menu-toggle span:nth-child(1) {
@@ -124,18 +130,13 @@ header.scrolled .main-nav {
   transform: rotate(90deg);
 }
 
-/* Aktiv: Plus dreht sich zum X */
+/* Animation + zum X beim aktiven Zustand */
 .menu-toggle.active span:nth-child(1) {
   transform: rotate(45deg);
 }
 
 .menu-toggle.active span:nth-child(2) {
   transform: rotate(-45deg);
-}
-
-/* Aktiv: Button interaktiv */
-header.scrolled .menu-toggle {
-  pointer-events: auto;
 }
 
 /* Spacer für Scroll */
