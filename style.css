@@ -84,8 +84,8 @@ header {
 .menu-toggle span {
   position: absolute;
   display: block;
-  width: 20px;
-  height: 2px;
+  width: 30px;
+  height: 3px;
   background-color: #fff;
   transition: all 0.5s ease;
 }
@@ -104,23 +104,4 @@ header {
 
 .menu-toggle.active span:nth-child(2) {
   transform: rotate(-45deg);
-}
-
-/* Wenn gescrollt */
-header.scrolled {
-  height: auto;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 1rem 2rem;
-}
-
-header.scrolled .site-title {
-  font-size: 2rem;
-  margin-right: auto;
-}
-
-header.scrolled .main-nav {
-  opacity: 1;
-  pointer-events: auto;
 }
