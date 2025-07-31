@@ -11,5 +11,4 @@ window.addEventListener('scroll', () => {
 
 menuToggle.addEventListener('click', () => {
   menuToggle.classList.toggle('active');
-  // Hier kannst du erweitern, ob das Menü z.B. aufklappt oder Seiten schließt
 });
