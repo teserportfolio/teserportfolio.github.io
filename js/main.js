@@ -1,20 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
   const header = document.querySelector(".site-header");
   const titleLetters = document.querySelectorAll(".site-title .title-letter");
-  const heroChars = document.querySelectorAll(".hero-char");
-  const hasHero = document.querySelector(".hero");
+  const heroLetters = document.querySelectorAll(".hero-letter");
 
-  let scatterTriggered = false;
-
-  // Zufällige Offsets für die Random-Buchstaben (PORTFOLIO 2026)
-  heroChars.forEach((char) => {
-    const angle = Math.random() * Math.PI * 2; // 0 bis 360 Grad
-    const distance = 200 + Math.random() * 250; // 200 bis 450 px
-    const rx = Math.cos(angle) * distance;
-    const ry = Math.sin(angle) * distance;
-    char.style.setProperty("--rx", rx + "px");
-    char.style.setProperty("--ry", ry + "px");
-  });
+  let flickerTriggered = false;
 
   // Verzögerung für Implosions-Animation der Header-Buchstaben
   titleLetters.forEach((letter, index) => {
@@ -22,36 +11,44 @@ document.addEventListener("DOMContentLoaded", function () {
     letter.style.setProperty("--delay", delay + "s");
   });
 
-  function onScroll() {
-    const scrollY = window.scrollY || window.pageYOffset;
+  function startFlicker() {
+    if (flickerTriggered) return;
+    flickerTriggered = true;
 
-    if (hasHero) {
-      // Erster Scroll: Random-Buchstaben fliegen auseinander, TILL ESER entsteht
-      if (!scatterTriggered && scrollY > 10) {
-        scatterTriggered = true;
-        document.body.classList.add("scatter-random");
-        setTimeout(() => {
-          document.body.classList.add("show-name");
-        }, 400);
-      }
+    document.body.classList.add("flicker-start");
 
-      // Header einblenden, wenn man weiter in Richtung Menü gescrollt hat
-      const trigger = window.innerHeight * 0.6;
-      if (scrollY > trigger) {
-        if (!header.classList.contains("visible")) {
-          header.classList.add("visible");
-          header.classList.add("animate-title");
-        }
-      }
-    } else {
-      // Auf Unterseiten: Header immer sichtbar
+    const duration = 0.9; // Dauer der Flicker-Animation pro Buchstabe
+    let maxDelay = 0;
+
+    heroLetters.forEach((letter) => {
+      const delay = Math.random() * 0.4; // zufällig 0–0.4s
+      maxDelay = Math.max(maxDelay, delay);
+      letter.style.animation = `letter-flicker-out ${duration}s ${delay}s forwards`;
+    });
+
+    // Wenn alle Buchstaben "ausgegangen" sind:
+    const total = (maxDelay + duration) * 1000 + 150;
+
+    setTimeout(() => {
+      document.body.classList.add("hide-hero");
+      document.body.classList.add("show-menu");
+
+      // Header einblenden + Implosions-Animation starten
       if (header && !header.classList.contains("visible")) {
         header.classList.add("visible");
         header.classList.add("animate-title");
       }
+    }, total);
+  }
+
+  function onScroll() {
+    const scrollY = window.scrollY || window.pageYOffset;
+
+    // Beim ersten Scrollen Flicker starten
+    if (scrollY > 10 && !flickerTriggered) {
+      startFlicker();
     }
   }
 
   window.addEventListener("scroll", onScroll);
-  onScroll();
 });
