@@ -2,14 +2,18 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>Design – Till Eser</title>
+  <title>Till Eser – Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Futuristische serifenlose Schrift -->
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body class="subpage">
+<body>
 
-  <header class="site-header visible animate-title">
+  <!-- Header: erscheint nach der Intro-Animation -->
+  <header class="site-header">
     <div class="site-title" aria-label="Till Eser">
       <span class="title-letter">T</span>
       <span class="title-letter">I</span>
@@ -22,16 +26,38 @@
       <span class="title-letter">R</span>
     </div>
 
-    <a href="index.html#menu" class="menu-toggle" aria-label="Zurück zum Menü">
+    <a href="#menu" class="menu-toggle" aria-label="Zur Menüansicht">
       <span></span>
       <span></span>
     </a>
   </header>
 
   <main>
-    <section class="subpage-content">
-      <h1>DESIGN</h1>
-      <p>Hier kannst du später deine Designprojekte listen.</p>
+    <!-- HERO: schwarzer Screen mit großem TILL ESER -->
+    <section class="hero">
+      <h1 class="hero-title" aria-label="TILL ESER">
+        <span class="hero-letter" data-x="-100" data-y="100">T</span>
+        <span class="hero-letter" data-x="-40" data-y="80">I</span>
+        <span class="hero-letter" data-x="-10" data-y="120">L</span>
+        <span class="hero-letter" data-x="20" data-y="90">L</span>
+        <span class="hero-letter space"></span>
+        <span class="hero-letter" data-x="60" data-y="80">E</span>
+        <span class="hero-letter" data-x="110" data-y="120">S</span>
+        <span class="hero-letter" data-x="150" data-y="90">E</span>
+        <span class="hero-letter" data-x="190" data-y="130">R</span>
+      </h1>
+      <div class="scroll-hint">scroll</div>
+    </section>
+
+    <!-- MENÜBEREICH -->
+    <section class="menu-section" id="menu">
+      <nav class="menu-nav">
+        <a href="design.html" class="menu-item">DESIGN</a>
+        <a href="graphic.html" class="menu-item">GRAPHIC</a>
+        <a href="illustration.html" class="menu-item">ILLUSTRATION</a>
+        <a href="cv.html" class="menu-item">CV</a>
+        <a href="contact.html" class="menu-item">CONTACT</a>
+      </nav>
     </section>
   </main>
 
