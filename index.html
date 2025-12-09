@@ -1,350 +1,66 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Till Eser – Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-html, body {
-  height: 100%;
-}
+  <!-- Schrift -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-body {
-  font-family: "Inter Tight", system-ui, -apple-system, BlinkMacSystemFont,
-    "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-  background: #000;
-  color: #fff;
-}
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
 
-/* Header oben links + X oben rechts */
+  <!-- Header: erscheint NACH der Flicker-Animation -->
+  <header class="site-header">
+    <div class="site-title" aria-label="Till Eser">
+      <span class="title-letter">T</span>
+      <span class="title-letter">I</span>
+      <span class="title-letter">L</span>
+      <span class="title-letter">L</span>
+      <span class="title-letter">&nbsp;</span>
+      <span class="title-letter">E</span>
+      <span class="title-letter">S</span>
+      <span class="title-letter">E</span>
+      <span class="title-letter">R</span>
+    </div>
 
-.site-header {
-  position: fixed;
-  top: 20px;
-  left: 24px;
-  right: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(-16px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  z-index: 20;
-}
+    <a href="#menu" class="menu-toggle" aria-label="Zur Menüansicht">
+      <span></span>
+      <span></span>
+    </a>
+  </header>
 
-.site-header.visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
+  <main>
+    <!-- HERO: TILL ESER in der Mitte, flackert beim Scroll weg -->
+    <section class="hero">
+      <h1 class="hero-title" aria-label="Till Eser">
+        <span class="hero-letter">T</span>
+        <span class="hero-letter">I</span>
+        <span class="hero-letter">L</span>
+        <span class="hero-letter">L</span>
+        <span class="hero-letter">&nbsp;</span>
+        <span class="hero-letter">E</span>
+        <span class="hero-letter">S</span>
+        <span class="hero-letter">E</span>
+        <span class="hero-letter">R</span>
+      </h1>
+      <div class="scroll-hint">scroll</div>
+    </section>
 
-.site-title {
-  font-size: 18px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-}
+    <!-- MENÜBEREICH -->
+    <section class="menu-section" id="menu">
+      <nav class="menu-nav">
+        <a href="design.html" class="menu-item">DESIGN</a>
+        <a href="graphic.html" class="menu-item">GRAPHIC</a>
+        <a href="illustration.html" class="menu-item">ILLUSTRATION</a>
+        <a href="cv.html" class="menu-item">CV</a>
+        <a href="contact.html" class="menu-item">CONTACT</a>
+      </nav>
+    </section>
+  </main>
 
-.site-title .title-letter {
-  display: inline-block;
-  transform: translateY(14px) scaleX(1.6);
-  opacity: 0;
-}
-
-/* Implosions-Animation für TILL ESER im Header */
-
-.site-header.animate-title .title-letter {
-  animation: title-implode 0.6s forwards;
-  animation-timing-function: cubic-bezier(0.25, 0.8, 0.3, 1);
-  animation-delay: var(--delay, 0s);
-}
-
-@keyframes title-implode {
-  0% {
-    transform: translateY(14px) scaleX(1.7);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0) scaleX(1);
-    opacity: 1;
-  }
-}
-
-/* X / + Button oben rechts */
-
-.menu-toggle {
-  position: fixed;
-  top: 20px;
-  right: 24px;
-  width: 26px;
-  height: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  pointer-events: auto;
-  transform-origin: center center;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.menu-toggle span {
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  background: #fff;
-}
-
-.menu-toggle span:nth-child(1) {
-  transform: rotate(45deg);
-}
-
-.menu-toggle span:nth-child(2) {
-  transform: rotate(-45deg);
-}
-
-.menu-toggle:hover {
-  transform: rotate(45deg);
-}
-
-/* HERO: futuristische Mitte */
-
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(circle at top, #181818 0, #000 55%);
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-title {
-  font-size: clamp(3.5rem, 11vw, 7rem);
-  font-weight: 500;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  text-align: center;
-  white-space: nowrap;
-}
-
-.hero-letter {
-  display: inline-block;
-  text-shadow:
-    0 0 8px rgba(0, 255, 180, 0.65),
-    0 0 18px rgba(0, 180, 255, 0.45);
-  transition: opacity 0.2s ease;
-}
-
-/* Flicker-Animation für TILL ESER im Hero */
-
-@keyframes letter-flicker-out {
-  0% {
-    opacity: 1;
-    transform: translate(0, 0);
-    filter: none;
-  }
-  20% {
-    opacity: 0.2;
-    filter: blur(0);
-  }
-  35% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.15;
-    transform: translate(1px, -1px);
-    filter: blur(1px);
-  }
-  65% {
-    opacity: 0.9;
-    transform: translate(-1px, 0);
-    filter: none;
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-10px);
-    filter: blur(2px);
-  }
-}
-
-body.flicker-start .hero-letter {
-  /* Animation wird per JS mit Delay gesetzt */
-}
-
-body.hide-hero .hero {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-}
-
-/* Scroll-Hinweis nur am Anfang, danach ausblenden */
-
-.scroll-hint {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 12px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  opacity: 0.5;
-  transition: opacity 0.3s ease;
-}
-
-body.hide-hero .scroll-hint {
-  opacity: 0;
-}
-
-/* MENÜ in der Mitte, linksbündig */
-
-.menu-section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #000;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-body.show-menu .menu-section {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.menu-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  align-items: flex-start;   /* linksbündig */
-  text-align: left;          /* linksbündig */
-}
-
-/* Menü-Flicker */
-
-@keyframes menu-flicker-in {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-    filter: blur(2px);
-  }
-  25% {
-    opacity: 0.3;
-  }
-  45% {
-    opacity: 0.8;
-  }
-  60% {
-    opacity: 0.2;
-  }
-  80% {
-    opacity: 1;
-    filter: blur(0);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-    filter: none;
-  }
-}
-
-.menu-item {
-  text-decoration: none;
-  color: #fff;
-  font-size: clamp(1.2rem, 3vw, 2rem);
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  position: relative;
-  padding: 6px 0;
-  overflow: hidden;
-  opacity: 0; /* Start unsichtbar */
-}
-
-.menu-item::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 1px;
-  width: 0%;
-  background: #fff;
-  transition: width 0.4s ease;
-}
-
-.menu-item:hover::after {
-  width: 100%;
-}
-
-/* Wenn Menü aktiv ist: nacheinander flackern */
-
-body.show-menu .menu-item {
-  animation: menu-flicker-in 0.7s forwards;
-}
-
-body.show-menu .menu-item:nth-child(1) {
-  animation-delay: 0.05s;
-}
-
-body.show-menu .menu-item:nth-child(2) {
-  animation-delay: 0.15s;
-}
-
-body.show-menu .menu-item:nth-child(3) {
-  animation-delay: 0.25s;
-}
-
-body.show-menu .menu-item:nth-child(4) {
-  animation-delay: 0.35s;
-}
-
-body.show-menu .menu-item:nth-child(5) {
-  animation-delay: 0.45s;
-}
-
-/* Unterseiten Layout */
-
-.subpage {
-  background: #000;
-  color: #fff;
-}
-
-.subpage main {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 80px 24px 40px;
-}
-
-.subpage-content {
-  max-width: 800px;
-  text-align: center;
-}
-
-.subpage-content h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-}
-
-.subpage-content p {
-  font-size: 14px;
-  line-height: 1.6;
-  opacity: 0.8;
-}
-
-/* Responsive */
-
-@media (max-width: 600px) {
-  .site-title {
-    font-size: 14px;
-    letter-spacing: 0.18em;
-  }
-
-  .menu-item {
-    letter-spacing: 0.28em;
-  }
-}
+  <script src="js/main.js"></script>
+</body>
+</html>
