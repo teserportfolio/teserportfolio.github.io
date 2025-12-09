@@ -130,9 +130,10 @@ body {
 
 .hero-letter {
   display: inline-block;
-  transition: opacity 0.15s ease;
+  text-shadow: none;
+  filter: none;
+  transition: opacity 0.12s ease;
 }
-
 
 
 /* Flicker-Animation für TILL ESER im Hero */
