@@ -136,6 +136,7 @@ body {
   transition: opacity 0.2s ease;
 }
 
+
 /* Flicker-Animation für TILL ESER im Hero */
 
 @keyframes letter-flicker-out {
