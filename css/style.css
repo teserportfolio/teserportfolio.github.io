@@ -120,4 +120,168 @@ body {
 }
 
 .hero-title {
-  font-size: clamp(3.5rem, 11vw, 7
+  font-size: clamp(3.5rem, 11vw, 7rem);
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.hero-letter {
+  display: inline-block;
+  text-shadow:
+    0 0 8px rgba(0, 255, 180, 0.65),
+    0 0 18px rgba(0, 180, 255, 0.45);
+  transition: opacity 0.2s ease;
+}
+
+/* Flicker-Animation */
+
+@keyframes letter-flicker-out {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0);
+    filter: none;
+  }
+  20% {
+    opacity: 0.2;
+    filter: blur(0);
+  }
+  35% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.15;
+    transform: translate(1px, -1px);
+    filter: blur(1px);
+  }
+  65% {
+    opacity: 0.9;
+    transform: translate(-1px, 0);
+    filter: none;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+    filter: blur(2px);
+  }
+}
+
+body.flicker-start .hero-letter {
+  /* Animation wird per JS mit Delay gesetzt */
+}
+
+body.hide-hero .hero {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+/* MENÜ in der Mitte */
+
+.menu-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+body.show-menu .menu-section {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: center;
+}
+
+.menu-item {
+  text-decoration: none;
+  color: #fff;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  position: relative;
+  padding: 6px 0;
+  overflow: hidden;
+}
+
+.menu-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 0%;
+  background: #fff;
+  transition: width 0.4s ease;
+}
+
+.menu-item:hover::after {
+  width: 100%;
+}
+
+/* Unterseiten Layout */
+
+.subpage {
+  background: #000;
+  color: #fff;
+}
+
+.subpage main {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px 40px;
+}
+
+.subpage-content {
+  max-width: 800px;
+  text-align: center;
+}
+
+.subpage-content h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.subpage-content p {
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  .site-title {
+    font-size: 14px;
+    letter-spacing: 0.18em;
+  }
+
+  .menu-item {
+    letter-spacing: 0.28em;
+  }
+}
