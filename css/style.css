@@ -280,28 +280,25 @@ body.show-menu .menu-section {
 /* Wenn Menü aktiv ist: nacheinander flackern */
 
 body.show-menu .menu-item {
-  animation: menu-flicker-in 0.7s forwards;
+  animation: menu-flicker-in 0.35s forwards;
 }
 
 body.show-menu .menu-item:nth-child(1) {
-  animation-delay: 0.05s;
+  animation-delay: 0.02s;
 }
-
 body.show-menu .menu-item:nth-child(2) {
-  animation-delay: 0.15s;
+  animation-delay: 0.07s;
 }
-
 body.show-menu .menu-item:nth-child(3) {
-  animation-delay: 0.25s;
+  animation-delay: 0.12s;
 }
-
 body.show-menu .menu-item:nth-child(4) {
-  animation-delay: 0.35s;
+  animation-delay: 0.17s;
+}
+body.show-menu .menu-item:nth-child(5) {
+  animation-delay: 0.22s;
 }
 
-body.show-menu .menu-item:nth-child(5) {
-  animation-delay: 0.45s;
-}
 
 /* Unterseiten Layout */
 
