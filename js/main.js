@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const header = document.querySelector(".site-header");
   const titleLetters = document.querySelectorAll(".site-title .title-letter");
   const heroLetters = document.querySelectorAll(".hero-letter");
+  const menuLinks = document.querySelectorAll(".menu-item");
 
   let flickerTriggered = false;
 
@@ -17,18 +18,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.body.classList.add("flicker-start");
 
-    const duration = 0.4; // kürzere Flicker-Dauer
-let maxDelay = 0;
+    const duration = 0.4; // schnelle Buchstaben-Flicker-Dauer
+    let maxDelay = 0;
 
-heroLetters.forEach((letter) => {
-  const delay = Math.random() * 0.15; // zufällig 0–0.15s
-  maxDelay = Math.max(maxDelay, delay);
-  letter.style.animation = `letter-flicker-out ${duration}s ${delay}s forwards`;
-});
-
+    heroLetters.forEach((letter) => {
+      const delay = Math.random() * 0.15; // zufällig 0–0.15s
+      maxDelay = Math.max(maxDelay, delay);
+      letter.style.animation = `letter-flicker-out ${duration}s ${delay}s forwards`;
+    });
 
     // Wenn alle Buchstaben "ausgegangen" sind:
-    const total = (maxDelay + duration) * 1000 + 150;
+    const total = (maxDelay + duration) * 1000 + 120;
 
     setTimeout(() => {
       // Hero ausblenden, Scroll-Hinweis verschwindet, Menü wird aktiv
@@ -47,10 +47,26 @@ heroLetters.forEach((letter) => {
     const scrollY = window.scrollY || window.pageYOffset;
 
     // Beim ersten Scrollen Flicker starten
-    if (scrollY > 10 && !flickerTriggered) {
+    if (scrollY > 10 && !flickerTriggered && heroLetters.length > 0) {
       startFlicker();
     }
   }
 
   window.addEventListener("scroll", onScroll);
+
+  // Klick auf Menüpunkt: komplette Seite flackert aus, dann neue Seite laden
+  menuLinks.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = this.href;
+
+      // Klasse setzen, damit die ganze Seite "ausflackert"
+      document.body.classList.add("page-fade-out");
+
+      // kurze Verzögerung, dann Seitenwechsel
+      setTimeout(() => {
+        window.location.href = target;
+      }, 280);
+    });
+  });
 });
