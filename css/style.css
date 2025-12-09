@@ -346,3 +346,33 @@ body.show-menu .menu-item:nth-child(5) {
     letter-spacing: 0.28em;
   }
 }
+/* Komplettes Seiten-Flicker beim Wechsel */
+
+@keyframes page-flicker-out {
+  0% {
+    opacity: 1;
+    filter: none;
+  }
+  30% {
+    opacity: 0.2;
+    filter: blur(1px);
+  }
+  55% {
+    opacity: 0.8;
+    filter: none;
+  }
+  75% {
+    opacity: 0.1;
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(3px);
+  }
+}
+
+body.page-fade-out main,
+body.page-fade-out .site-header {
+  animation: page-flicker-out 0.25s forwards;
+}
+
