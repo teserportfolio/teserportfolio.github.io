@@ -1,14 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const heroLetters = document.querySelectorAll(".hero-letter");
   const header = document.querySelector(".site-header");
   const titleLetters = document.querySelectorAll(".site-title .title-letter");
+  const heroChars = document.querySelectorAll(".hero-char");
+  const hasHero = document.querySelector(".hero");
 
-  // Offsets für die Drift-Animation setzen (aus data-x / data-y)
-  heroLetters.forEach((letter) => {
-    const x = letter.dataset.x || 0;
-    const y = letter.dataset.y || 0;
-    letter.style.setProperty("--x", x + "px");
-    letter.style.setProperty("--y", y + "px");
+  let scatterTriggered = false;
+
+  // Zufällige Offsets für die Random-Buchstaben (PORTFOLIO 2026)
+  heroChars.forEach((char) => {
+    const angle = Math.random() * Math.PI * 2; // 0 bis 360 Grad
+    const distance = 200 + Math.random() * 250; // 200 bis 450 px
+    const rx = Math.cos(angle) * distance;
+    const ry = Math.sin(angle) * distance;
+    char.style.setProperty("--rx", rx + "px");
+    char.style.setProperty("--ry", ry + "px");
   });
 
   // Verzögerung für Implosions-Animation der Header-Buchstaben
@@ -17,22 +22,21 @@ document.addEventListener("DOMContentLoaded", function () {
     letter.style.setProperty("--delay", delay + "s");
   });
 
-  // Scroll-Logik nur auf der Startseite mit HERO
-  const hasHero = document.querySelector(".hero");
-
   function onScroll() {
     const scrollY = window.scrollY || window.pageYOffset;
 
     if (hasHero) {
-      // Sobald ein wenig gescrolled wird, Buchstaben auseinanderlaufen lassen
-      if (scrollY > 10) {
-        document.body.classList.add("disperse-hero");
-      } else {
-        document.body.classList.remove("disperse-hero");
+      // Erster Scroll: Random-Buchstaben fliegen auseinander, TILL ESER entsteht
+      if (!scatterTriggered && scrollY > 10) {
+        scatterTriggered = true;
+        document.body.classList.add("scatter-random");
+        setTimeout(() => {
+          document.body.classList.add("show-name");
+        }, 400);
       }
 
-      // Header einblenden, wenn man deutlich in Richtung Menü gescrollt hat
-      const trigger = window.innerHeight * 0.3;
+      // Header einblenden, wenn man weiter in Richtung Menü gescrollt hat
+      const trigger = window.innerHeight * 0.6;
       if (scrollY > trigger) {
         if (!header.classList.contains("visible")) {
           header.classList.add("visible");
@@ -40,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     } else {
-      // Auf Unterseiten ist der Header immer sichtbar
+      // Auf Unterseiten: Header immer sichtbar
       if (header && !header.classList.contains("visible")) {
         header.classList.add("visible");
         header.classList.add("animate-title");
@@ -51,4 +55,3 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("scroll", onScroll);
   onScroll();
 });
-
