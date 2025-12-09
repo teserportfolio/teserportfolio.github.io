@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let flickerTriggered = false;
 
-  // Verzögerung für Implosions-Animation der Header-Buchstaben
+  // Verzögerung für Implosions-Animation der Header-Buchstaben (oben links)
   titleLetters.forEach((letter, index) => {
     const delay = index * 0.06;
     letter.style.setProperty("--delay", delay + "s");
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.body.classList.add("flicker-start");
 
-    const duration = 0.9; // Dauer der Flicker-Animation pro Buchstabe
+    const duration = 0.9; // Dauer der Buchstaben-Flicker-Animation
     let maxDelay = 0;
 
     heroLetters.forEach((letter) => {
@@ -30,10 +30,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const total = (maxDelay + duration) * 1000 + 150;
 
     setTimeout(() => {
+      // Hero ausblenden, Scroll-Hinweis verschwindet, Menü wird aktiv
       document.body.classList.add("hide-hero");
       document.body.classList.add("show-menu");
 
-      // Header einblenden + Implosions-Animation starten
+      // Header einblenden und animieren
       if (header && !header.classList.contains("visible")) {
         header.classList.add("visible");
         header.classList.add("animate-title");
