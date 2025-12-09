@@ -17,14 +17,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.body.classList.add("flicker-start");
 
-    const duration = 0.9; // Dauer der Buchstaben-Flicker-Animation
-    let maxDelay = 0;
+    const duration = 0.4; // kürzere Flicker-Dauer
+let maxDelay = 0;
 
-    heroLetters.forEach((letter) => {
-      const delay = Math.random() * 0.4; // zufällig 0–0.4s
-      maxDelay = Math.max(maxDelay, delay);
-      letter.style.animation = `letter-flicker-out ${duration}s ${delay}s forwards`;
-    });
+heroLetters.forEach((letter) => {
+  const delay = Math.random() * 0.15; // zufällig 0–0.15s
+  maxDelay = Math.max(maxDelay, delay);
+  letter.style.animation = `letter-flicker-out ${duration}s ${delay}s forwards`;
+});
+
 
     // Wenn alle Buchstaben "ausgegangen" sind:
     const total = (maxDelay + duration) * 1000 + 150;
