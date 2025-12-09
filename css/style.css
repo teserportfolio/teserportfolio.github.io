@@ -204,9 +204,10 @@ body.hide-hero .scroll-hint {
   justify-content: center;
   background: #000;
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
 
 body.show-menu .menu-section {
   opacity: 1;
