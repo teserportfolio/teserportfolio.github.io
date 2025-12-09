@@ -334,6 +334,34 @@ body.show-menu .menu-item:nth-child(5) {
   opacity: 0.8;
 }
 
+/* Grid auf den Unterseiten: 3x3 quadratische Kästen */
+
+.subpage-content {
+  max-width: 1000px;
+  text-align: left;
+}
+
+.subpage-grid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.subpage-tile {
+  aspect-ratio: 1 / 1; /* quadratisch */
+  border: 1px solid #333;
+  background: #080808;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #666;
+}
+
+
 /* Responsive */
 
 @media (max-width: 600px) {
