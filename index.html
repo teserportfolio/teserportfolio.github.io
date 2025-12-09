@@ -4,12 +4,15 @@
   <meta charset="UTF-8" />
   <title>Till Eser – Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Schrift -->
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- Header: erscheint nach der Intro-Animation -->
+  <!-- Header: erscheint erst später -->
   <header class="site-header">
     <div class="site-title" aria-label="Till Eser">
       <span class="title-letter">T</span>
@@ -30,20 +33,42 @@
   </header>
 
   <main>
-    <!-- HERO: schwarzer Screen mit großem TILL ESER -->
+    <!-- HERO: zuerst random Buchstaben/Zahlen, dann TILL ESER -->
     <section class="hero">
-      <h1 class="hero-title" aria-label="TILL ESER">
-        <span class="hero-letter" data-x="-100" data-y="100">T</span>
-        <span class="hero-letter" data-x="-40" data-y="80">I</span>
-        <span class="hero-letter" data-x="-10" data-y="120">L</span>
-        <span class="hero-letter" data-x="20" data-y="90">L</span>
-        <span class="hero-letter space"></span>
-        <span class="hero-letter" data-x="60" data-y="80">E</span>
-        <span class="hero-letter" data-x="110" data-y="120">S</span>
-        <span class="hero-letter" data-x="150" data-y="90">E</span>
-        <span class="hero-letter" data-x="190" data-y="130">R</span>
-      </h1>
-      <div class="scroll-hint">scroll</div>
+      <div class="hero-inner">
+        <!-- Random Fronttext wie bei t72t -->
+        <h1 class="hero-title hero-random" aria-label="Portfolio 2026">
+          <span class="hero-char">P</span>
+          <span class="hero-char">O</span>
+          <span class="hero-char">R</span>
+          <span class="hero-char">T</span>
+          <span class="hero-char">F</span>
+          <span class="hero-char">O</span>
+          <span class="hero-char">L</span>
+          <span class="hero-char">I</span>
+          <span class="hero-char">O</span>
+          <span class="hero-char">&nbsp;</span>
+          <span class="hero-char">2</span>
+          <span class="hero-char">0</span>
+          <span class="hero-char">2</span>
+          <span class="hero-char">6</span>
+        </h1>
+
+        <!-- TILL ESER entsteht nach dem ersten Scroll -->
+        <h1 class="hero-title hero-name" aria-label="Till Eser">
+          <span class="hero-name-letter">T</span>
+          <span class="hero-name-letter">I</span>
+          <span class="hero-name-letter">L</span>
+          <span class="hero-name-letter">L</span>
+          <span class="hero-name-letter">&nbsp;</span>
+          <span class="hero-name-letter">E</span>
+          <span class="hero-name-letter">S</span>
+          <span class="hero-name-letter">E</span>
+          <span class="hero-name-letter">R</span>
+        </h1>
+
+        <div class="scroll-hint">scroll</div>
+      </div>
     </section>
 
     <!-- MENÜBEREICH -->
