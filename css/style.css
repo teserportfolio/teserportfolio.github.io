@@ -103,13 +103,11 @@ body {
   transform: rotate(-45deg);
 }
 
-/* Hover dreht das X zu einem + */
-
 .menu-toggle:hover {
   transform: rotate(45deg);
 }
 
-/* HERO: Vollbild mit großem TILL ESER */
+/* HERO Bereich */
 
 .hero {
   min-height: 100vh;
@@ -121,28 +119,65 @@ body {
   overflow: hidden;
 }
 
+.hero-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 .hero-title {
-  font-size: clamp(3rem, 12vw, 7rem);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(3rem, 10vw, 6rem);
   font-weight: 500;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  text-align: center;
   white-space: nowrap;
 }
 
-.hero-letter {
+/* Random Fronttext */
+
+.hero-random {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.hero-char {
   display: inline-block;
-  transition: transform 0.9s ease-out, opacity 0.9s ease-out;
+  transition: transform 1s ease-out, opacity 0.8s ease-out;
 }
 
-.hero-letter.space {
-  width: 0.5em;
+/* Random auseinanderlaufen beim ersten Scroll */
+
+body.scatter-random .hero-char {
+  transform: translate(var(--rx, 0px), var(--ry, 0px));
+  opacity: 0;
 }
 
-/* Wenn gescrolled wird, driftet alles auseinander */
+/* TILL ESER in der Mitte, entsteht nach dem Scatter */
 
-body.disperse-hero .hero-letter {
-  transform: translate(var(--x, 0px), var(--y, 0px));
+.hero-name {
+  opacity: 0;
+  transform: translate(-50%, -50%) translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.hero-name-letter {
+  display: inline-block;
+}
+
+/* Wenn TILL ESER erscheinen soll */
+
+body.show-name .hero-name {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(0);
+}
+
+/* Optional: Randomtext ausblenden, sobald Name aktiv ist */
+
+body.show-name .hero-random {
   opacity: 0;
 }
 
@@ -233,7 +268,7 @@ body.disperse-hero .hero-letter {
   opacity: 0.8;
 }
 
-/* Responsiveness */
+/* Responsive */
 
 @media (max-width: 600px) {
   .site-title {
@@ -245,4 +280,3 @@ body.disperse-hero .hero-letter {
     letter-spacing: 0.28em;
   }
 }
-
