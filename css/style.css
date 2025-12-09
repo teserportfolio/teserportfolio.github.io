@@ -136,7 +136,7 @@ body {
   transition: opacity 0.2s ease;
 }
 
-/* Flicker-Animation */
+/* Flicker-Animation für TILL ESER im Hero */
 
 @keyframes letter-flicker-out {
   0% {
@@ -178,6 +178,8 @@ body.hide-hero .hero {
   transition: opacity 0.4s ease;
 }
 
+/* Scroll-Hinweis nur am Anfang, danach ausblenden */
+
 .scroll-hint {
   position: absolute;
   bottom: 32px;
@@ -187,9 +189,14 @@ body.hide-hero .hero {
   letter-spacing: 0.3em;
   text-transform: uppercase;
   opacity: 0.5;
+  transition: opacity 0.3s ease;
 }
 
-/* MENÜ in der Mitte */
+body.hide-hero .scroll-hint {
+  opacity: 0;
+}
+
+/* MENÜ in der Mitte, linksbündig */
 
 .menu-section {
   min-height: 100vh;
@@ -211,7 +218,36 @@ body.show-menu .menu-section {
   display: flex;
   flex-direction: column;
   gap: 18px;
-  text-align: center;
+  align-items: flex-start;   /* linksbündig */
+  text-align: left;          /* linksbündig */
+}
+
+/* Menü-Flicker */
+
+@keyframes menu-flicker-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(2px);
+  }
+  25% {
+    opacity: 0.3;
+  }
+  45% {
+    opacity: 0.8;
+  }
+  60% {
+    opacity: 0.2;
+  }
+  80% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: none;
+  }
 }
 
 .menu-item {
@@ -223,6 +259,7 @@ body.show-menu .menu-section {
   position: relative;
   padding: 6px 0;
   overflow: hidden;
+  opacity: 0; /* Start unsichtbar */
 }
 
 .menu-item::after {
@@ -238,6 +275,32 @@ body.show-menu .menu-section {
 
 .menu-item:hover::after {
   width: 100%;
+}
+
+/* Wenn Menü aktiv ist: nacheinander flackern */
+
+body.show-menu .menu-item {
+  animation: menu-flicker-in 0.7s forwards;
+}
+
+body.show-menu .menu-item:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+body.show-menu .menu-item:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+body.show-menu .menu-item:nth-child(3) {
+  animation-delay: 0.25s;
+}
+
+body.show-menu .menu-item:nth-child(4) {
+  animation-delay: 0.35s;
+}
+
+body.show-menu .menu-item:nth-child(5) {
+  animation-delay: 0.45s;
 }
 
 /* Unterseiten Layout */
