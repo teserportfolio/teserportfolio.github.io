@@ -1,65 +1,16 @@
-# Till Eser — portfolio
+# Till Eser — GitHub Pages correction
 
-A static black-and-white portfolio for GitHub Pages. No build command or external library is needed.
+This package matches the current structure of `teserportfolio/teserportfolio.github.io`: every HTML, CSS and JavaScript file sits directly in the repository root.
 
-## Files
+## Update the existing repository
 
-- `index.html` — scroll-driven introduction and menu
-- `design.html`, `graphic.html`, `illustration.html` — nine square project cards per category
-- `project.html` — individual project view, selected by its URL parameters
-- `cv.html`, `contact.html` — CV placeholder and contact details
-- `assets/css/style.css` — layout and typography
-- `assets/js/main.js` — animation, navigation and project rendering
-- `assets/js/projects.js` — editable project titles, descriptions and image paths
+1. Extract this ZIP on your computer.
+2. On the repository Code page, choose Add file → Upload files.
+3. Upload the extracted files themselves (not the enclosing folder or ZIP). They replace the files with the same names in the root. Commit the changes.
+4. Open `https://teserportfolio.github.io/` again after the Pages deployment completes. If your browser shows a cached version, reload it with Ctrl+F5.
 
-## Put it on your existing GitHub Pages website
+The entry file `index.html` now loads `style.css` and `main.js` from the root. Design, Graphic, Illustration and project pages load `projects.js` from the root too. Each category has nine square project placeholders.
 
-1. Back up the files currently published from your repository.
-2. Copy the **contents** of this folder into the directory GitHub Pages already publishes, usually the repository root. Keep the `assets` folder structure intact.
-3. Commit and push the changed files. `index.html` becomes the start page.
+## Later edits
 
-All links and asset paths are relative, so the site also works when GitHub Pages serves a repository under a path such as `/my-portfolio/`.
-
-To preview locally, open a terminal in this folder and run `python3 -m http.server 8000`; then open `http://localhost:8000/`.
-
-## Replace project placeholders
-
-Each category has nine entries in `assets/js/projects.js`. The nine cards lead to individual URLs such as `project.html?category=design&id=01`.
-
-Add images to `assets/images/` and edit an entry, for example:
-
-```js
-{
-  id: '01',
-  title: 'YOUR PROJECT NAME',
-  description: 'A short project description.',
-  cover: 'assets/images/design-01.jpg',
-  gallery: [
-    'assets/images/design-01-detail-a.jpg',
-    'assets/images/design-01-detail-b.jpg'
-  ]
-}
-```
-
-The cover fills the square on the overview page and the main square on the project page. Gallery images appear beneath it. Empty image paths remain visible placeholders. Add or remove entries if the number of projects changes; the page count updates automatically.
-
-## Add the CV
-
-The block with class `cv-placeholder` in `cv.html` is temporary. After uploading a CV file to `assets/files/`, replace that block with either a PDF link or an image. Examples:
-
-```html
-<a class="cv-file-link" href="assets/files/till-eser-cv.pdf" target="_blank" rel="noopener">OPEN CV (PDF) ↗</a>
-```
-
-```html
-<img class="cv-image" src="assets/files/till-eser-cv.png" alt="CV of Till Eser">
-```
-
-The email address and phone number are in `contact.html`. Change them there if needed.
-
-## Interaction
-
-- Scroll down on the start page to disperse the title letters and assemble the five menu links.
-- The `+` opens the menu. It rotates into an `×` and returns to the start when clicked again.
-- The small `TILL ESER` title at the end of the animation also returns to the start. On inner pages the title and `×` lead to `index.html`.
-- The animation follows scroll position, including scrolling back upward. Reduced-motion settings remove the letter scattering.
+Project text and image paths are in `projects.js`. If you add images, create an `assets/images/` folder and use paths such as `assets/images/design-01.jpg` in that file. The CV placeholder is in `cv.html`; the contact details are in `contact.html`.
