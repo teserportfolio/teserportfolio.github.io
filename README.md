@@ -1,16 +1,27 @@
-# Till Eser — GitHub Pages correction
+# Portfolio Till Eser
 
-This package matches the current structure of `teserportfolio/teserportfolio.github.io`: every HTML, CSS and JavaScript file sits directly in the repository root.
+Dieses Paket ist für das bestehende Repository `teserportfolio/teserportfolio.github.io` vorbereitet. Alle HTML-, CSS- und JavaScript-Dateien gehören direkt ins Hauptverzeichnis. Es ist keine Installation nötig.
 
-## Update the existing repository
+## Auf GitHub aktualisieren
 
-1. Extract this ZIP on your computer.
-2. On the repository Code page, choose Add file → Upload files.
-3. Upload the extracted files themselves (not the enclosing folder or ZIP). They replace the files with the same names in the root. Commit the changes.
-4. Open `https://teserportfolio.github.io/` again after the Pages deployment completes. If your browser shows a cached version, reload it with Ctrl+F5.
+1. Die ZIP-Datei auf deinem Computer **entpacken**. Die ZIP-Datei selbst nicht hochladen.
+2. Im Repository auf **Code → Add file → Upload files** klicken.
+3. Die **Dateien aus dem entpackten Ordner** auswählen und direkt ins Hauptverzeichnis hochladen, nicht den ganzen Ordner. Die gleichnamigen Dateien damit ersetzen und unten **Commit changes** wählen.
+4. Nach der Veröffentlichung [teserportfolio.github.io](https://teserportfolio.github.io/) neu öffnen. Falls du noch die alte Version siehst, die Seite mit `Strg + F5` neu laden.
 
-The entry file `index.html` now loads `style.css` and `main.js` from the root. Design, Graphic, Illustration and project pages load `projects.js` from the root too. Each category has nine square project placeholders.
+Die Startseite lädt `style.css` und `main.js` aus dem Hauptverzeichnis. Die Projektseiten laden zusätzlich `projects.js`. Alle elf Dateien im Paket gehören zusammen.
 
-## Later edits
+## Verhalten
 
-Project text and image paths are in `projects.js`. If you add images, create an `assets/images/` folder and use paths such as `assets/images/design-01.jpg` in that file. The CV placeholder is in `cv.html`; the contact details are in `contact.html`.
+- Eine Scrollbewegung nach unten spielt die vollständige Startanimation ab. Scrollen nach oben setzt sie nicht zurück.
+- Die großen Buchstaben von TILL ESER laufen einzeln nur waagrecht oder senkrecht aus dem Bild. Der kleine Name und das Menü kommen von außen herein.
+- Ein Klick auf TILL ESER oder das X führt zur Startansicht.
+- Bei einem Seitenwechsel verschwindet der vorhandene Text nach links. Die neue Überschrift kommt von rechts, die Kacheln kommen von unten.
+- DESIGN, GRAPHIC und ILLUSTRATION zeigen am Computer je neun kleinere Projektkacheln im 3×3-Raster. Auf kleinen Bildschirmen passt sich die Anzahl der Spalten an.
+- Jede Kachel führt zu einer eigenen Projektansicht mit Überschrift, Textfeld und neun quadratischen Bildfeldern.
+
+## Später eigene Projekte einfügen
+
+In `projects.js` kannst du pro Projekt `title` (Titel), `description` (Text), `cover` (erstes Bild) und `gallery` (bis zu acht weitere Bilder) ändern. Bilder kannst du beispielsweise in einen neuen Ordner `assets/images/` hochladen und so referenzieren: `assets/images/design-01.jpg`. Ohne Bildpfad bleibt ein Platzhalter sichtbar.
+
+Der CV-Platzhalter steht in `cv.html`; die Kontaktdaten stehen in `contact.html`.
