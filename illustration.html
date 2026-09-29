@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#050505">
     <style>html,body{background:#050505;color:#f7f7f4}</style>
-    <meta name="description" content="Illustration projects by Till Eser.">
+    <meta name="description" content="Illustration gallery by Till Eser.">
     <title>Illustration — Till Eser</title>
     <script>try { if (sessionStorage.getItem('te-page-transition')) document.documentElement.classList.add('page-entering'); } catch (e) {}</script>
     <link rel="stylesheet" href="style.css">
@@ -19,11 +19,15 @@
       <a class="corner-control is-cross" href="index.html" aria-label="Back to home"><span class="plus-icon" aria-hidden="true"></span></a>
     </header>
     <main id="main" class="page-main">
-      <div class="page-kicker"><span>PORTFOLIO / 03</span><span>SELECTED WORK</span></div>
+      <div class="page-kicker"><span>PORTFOLIO / 03</span><span>IMAGE GALLERY</span></div>
       <h1 class="page-title">ILLUSTRATION<span class="title-dot">.</span></h1>
-      <div class="section-rule"><span>PROJECTS</span><span data-project-count>09</span></div>
-      <div class="project-grid" data-project-grid></div>
+      <div class="section-rule"><span>ILLUSTRATIONS</span><span data-art-count>25</span></div>
+      <div class="illustration-mosaic" data-illustration-mosaic aria-label="Illustration gallery"></div>
     </main>
     <footer class="site-footer" data-footer></footer>
+    <dialog class="art-lightbox" data-art-lightbox aria-label="Enlarged illustration">
+      <button type="button" class="lightbox-close" data-lightbox-close aria-label="Close enlarged illustration">×</button>
+      <div class="lightbox-stage" data-lightbox-stage></div>
+    </dialog>
   </body>
 </html>

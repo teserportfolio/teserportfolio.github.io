@@ -63,6 +63,80 @@
     if (count) count.textContent = String(categoryData.projects.length).padStart(2, '0');
   }
 
+  function initIllustrationGallery() {
+    const mosaic = document.querySelector('[data-illustration-mosaic]');
+    if (!mosaic) return;
+    const artworks = data.illustration?.artworks || [];
+    const dialog = document.querySelector('[data-art-lightbox]');
+    const stage = dialog.querySelector('[data-lightbox-stage]');
+    const rows = [
+      [2, 3, 2, 3, 2],
+      [3, 2, 2, 3, 2],
+      [2, 2, 3, 2, 3],
+      [3, 2, 3, 2, 2],
+      [2, 3, 2, 2, 3]
+    ];
+    const heights = [2, 3, 2, 3, 2];
+    let current = 0;
+    let wheelLocked = false;
+    let lastFocused = null;
+    artworks.forEach((artwork, index) => {
+      const rowIndex = Math.floor(index / 5);
+      const columnIndex = index % 5;
+      const width = rows[rowIndex][columnIndex];
+      const columnStart = rows[rowIndex].slice(0, columnIndex).reduce((sum, value) => sum + value, 1);
+      const rowStartForTile = heights.slice(0, rowIndex).reduce((sum, value) => sum + value, 1);
+      const button = make('button', 'illustration-tile');
+      button.type = 'button';
+      button.setAttribute('aria-label', `Enlarge ${artwork.title}`);
+      button.style.setProperty('--tile-column', columnStart);
+      button.style.setProperty('--tile-row', rowStartForTile);
+      button.style.setProperty('--tile-width', width);
+      button.style.setProperty('--tile-height', heights[rowIndex]);
+      button.append(coverElement('illustration-cover', artwork, artwork.id, artwork.image));
+      button.addEventListener('click', () => {
+        lastFocused = button;
+        current = index;
+        showArtwork(artwork);
+        document.body.classList.add('lightbox-open');
+        dialog.showModal();
+      });
+      mosaic.append(button);
+    });
+
+    function showArtwork(artwork) {
+      stage.replaceChildren();
+      dialog.setAttribute('aria-label', artwork.title);
+      if (artwork.image) {
+        const image = make('img');
+        image.src = artwork.image;
+        image.alt = artwork.title;
+        stage.append(image);
+      } else {
+        stage.append(coverElement('lightbox-cover', artwork, artwork.id, ''));
+      }
+    }
+
+    dialog.querySelector('[data-lightbox-close]').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+    dialog.addEventListener('wheel', event => {
+      if (event.ctrlKey) return;
+      event.preventDefault();
+      if (wheelLocked || event.deltaY === 0) return;
+      current = (current + (event.deltaY > 0 ? 1 : -1) + artworks.length) % artworks.length;
+      showArtwork(artworks[current]);
+      wheelLocked = true;
+      window.setTimeout(() => { wheelLocked = false; }, 550);
+    }, { passive: false });
+    dialog.addEventListener('close', () => {
+      document.body.classList.remove('lightbox-open');
+      wheelLocked = false;
+      lastFocused?.focus();
+    });
+    const artCount = document.querySelector('[data-art-count]');
+    if (artCount) artCount.textContent = String(artworks.length).padStart(2, '0');
+  }
+
   function initProjectDetail() {
     const main = document.querySelector('[data-detail-main]');
     if (!main) return;
@@ -137,6 +211,23 @@
     backToTop.href = '#';
     base.append(make('span', '', `© ${new Date().getFullYear()} TILL ESER`), backToTop);
     footer.append(nav, base);
+  }
+
+  function initTopNav() {
+    const header = document.querySelector('.site-header');
+    if (!header) return;
+    const nav = make('nav', 'site-top-nav');
+    nav.setAttribute('aria-label', 'Portfolio sections');
+    const currentPage = window.location.pathname.split('/').pop();
+    sections.forEach(([href, label]) => {
+      const link = make('a', '', label);
+      link.href = href;
+      if (currentPage === href || (currentPage === 'project.html' && document.body.dataset.category === href.replace('.html', ''))) {
+        link.setAttribute('aria-current', 'page');
+      }
+      nav.append(link);
+    });
+    header.insertBefore(nav, header.querySelector('.corner-control'));
   }
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -361,7 +452,7 @@
     }
 
     const heading = document.querySelector('.page-title');
-    const tiles = [...document.querySelectorAll('.project-card, .gallery-cover, .cv-placeholder, .cv-image, .cv-file-link')];
+    const tiles = [...document.querySelectorAll('.project-card, .gallery-cover, .illustration-tile, .cv-placeholder, .cv-image, .cv-file-link')];
     const textElements = [...document.querySelectorAll('.site-header, .page-kicker, .section-rule, .detail-headline, .detail-intro, .contact-line, .detail-bottom-nav, .cv-side, .site-footer')];
     const paths = [];
     if (heading) paths.push(motion(heading,
@@ -376,7 +467,7 @@
     });
     tiles.forEach((element, index) => paths.push(motion(element,
       [{ transform: axisOffset('y', 1), opacity: 0 }, { transform: 'translate3d(0,0,0)', opacity: 1 }],
-      { duration: 690, delay: 220 + index * 65, easing: enterEase })));
+      { duration: 690, delay: 220 + Math.min(index, 12) * 50, easing: enterEase })));
     requestAnimationFrame(() => document.documentElement.classList.remove('page-entering'));
     Promise.all(paths).then(() => finishMotion([heading, ...tiles, ...textElements].filter(Boolean), 1));
   }
@@ -403,7 +494,7 @@
       const motions = home && homeController ? homeController.depart() : [];
       if (!home) {
         const textElements = [...document.querySelectorAll('.site-header, .page-kicker, .page-title, .section-rule, .detail-headline, .detail-intro, .contact-line, .detail-bottom-nav, .cv-side, .site-footer')];
-        const tiles = [...document.querySelectorAll('.project-card, .gallery-cover, .cv-placeholder, .cv-image, .cv-file-link')];
+        const tiles = [...document.querySelectorAll('.project-card, .gallery-cover, .illustration-tile, .cv-placeholder, .cv-image, .cv-file-link')];
         textElements.forEach((element, index) => motions.push(motion(element,
           [{ transform: 'translate3d(0,0,0)', opacity: 1 }, { transform: axisOffset('x', -1), opacity: 0 }],
           { duration: 470, delay: Math.min(index, 7) * 20, easing: exitEase })));
@@ -418,6 +509,8 @@
 
   initProjectDetail();
   initProjectGrid();
+  initIllustrationGallery();
+  initTopNav();
   initFooter();
   homeController = initHome();
   if (!homeController) pageEntrance();
