@@ -361,11 +361,8 @@ body[data-category="illustration"] .page-title { font-size: clamp(30px, 5.2vw, 7
 .contact-line:hover .contact-value { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 8px; }
 
 /* Shared footer */
-.site-footer { margin: 0 var(--gutter); border-top: 1px solid var(--white); }
-.footer-nav { display: flex; flex-wrap: wrap; gap: 15px 28px; padding: 25px 0 90px; }
-.footer-nav a { text-decoration: none; font-size: clamp(12px, 1.1vw, 16px); font-weight: 400; }
-.footer-nav a:hover, .footer-nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 4px; }
-.footer-base { display: flex; justify-content: space-between; gap: 20px; padding-bottom: 27px; font-size: 11px; letter-spacing: 0.075em; }
+.site-footer { margin: 0 var(--gutter); }
+.footer-base { display: flex; justify-content: flex-end; padding-bottom: 27px; font-size: 11px; letter-spacing: 0.075em; }
 .footer-base a { text-decoration: none; }
 .footer-base a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
@@ -441,7 +438,6 @@ html.home-arriving .intro-title { visibility: hidden; }
   .contact-line { grid-template-columns: 1fr 25px; gap: 14px; padding: 24px 0 30px; }
   .contact-kind { grid-column: 1 / -1; }
   .contact-value { font-size: clamp(24px, 6.4vw, 42px); }
-  .footer-nav { padding-bottom: 75px; }
 }
 
 @media (max-width: 380px) {

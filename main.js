@@ -192,22 +192,11 @@
   function initFooter() {
     const footer = document.querySelector('[data-footer]');
     if (!footer) return;
-    const nav = make('nav', 'footer-nav');
-    nav.setAttribute('aria-label', 'Footer navigation');
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    sections.forEach(([href, label]) => {
-      const link = make('a', '', label);
-      link.href = href;
-      if (currentPage === href || (currentPage === 'project.html' && document.body.dataset.category === href.replace('.html', ''))) {
-        link.setAttribute('aria-current', 'page');
-      }
-      nav.append(link);
-    });
     const base = make('div', 'footer-base');
-    const backToTop = make('a', 'back-top', 'BACK TO TOP ↑');
+    const backToTop = make('a', 'back-top', 'BACK TO TOP');
     backToTop.href = '#';
-    base.append(make('span', '', `© ${new Date().getFullYear()} TILL ESER`), backToTop);
-    footer.append(nav, base);
+    base.append(backToTop);
+    footer.append(base);
   }
 
   function initTopNav() {
