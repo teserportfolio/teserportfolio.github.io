@@ -76,23 +76,21 @@
       [3, 2, 3, 2, 2],
       [2, 3, 2, 2, 3]
     ];
-    const heights = [2, 3, 2, 3, 2];
     let current = 0;
     let wheelLocked = false;
     let lastFocused = null;
     artworks.forEach((artwork, index) => {
       const rowIndex = Math.floor(index / 5);
+      const widths = rows[rowIndex % rows.length];
       const columnIndex = index % 5;
-      const width = rows[rowIndex][columnIndex];
-      const columnStart = rows[rowIndex].slice(0, columnIndex).reduce((sum, value) => sum + value, 1);
-      const rowStartForTile = heights.slice(0, rowIndex).reduce((sum, value) => sum + value, 1);
+      const width = widths[columnIndex];
+      const columnStart = widths.slice(0, columnIndex).reduce((sum, value) => sum + value, 1);
       const button = make('button', 'illustration-tile');
       button.type = 'button';
       button.setAttribute('aria-label', `Enlarge ${artwork.title}`);
       button.style.setProperty('--tile-column', columnStart);
-      button.style.setProperty('--tile-row', rowStartForTile);
+      button.style.setProperty('--tile-row', rowIndex + 1);
       button.style.setProperty('--tile-width', width);
-      button.style.setProperty('--tile-height', heights[rowIndex]);
       button.append(coverElement('illustration-cover', artwork, artwork.id, artwork.image));
       button.addEventListener('click', () => {
         lastFocused = button;
@@ -148,7 +146,6 @@
     const index = categoryData ? categoryData.projects.findIndex(item => item.id === id) : -1;
 
     if (index === -1) {
-      main.append(make('div', 'page-kicker', 'PORTFOLIO / PROJECT'));
       main.append(make('h1', 'page-title', 'NOT FOUND.'));
       const back = make('a', 'detail-crumb', '← BACK TO HOME');
       back.href = 'index.html';
@@ -228,6 +225,56 @@
       nav.append(link);
     });
     header.insertBefore(nav, header.querySelector('.corner-control'));
+  }
+
+  function initCursor() {
+    if (!window.CSS?.supports('mix-blend-mode', 'difference')) return;
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine) and (forced-colors: none)');
+    const cursor = make('span', 'custom-cursor');
+    cursor.setAttribute('aria-hidden', 'true');
+    document.body.append(cursor);
+    let position = null;
+    let frame = 0;
+
+    function syncHost() {
+      // Modal dialogs occupy the top layer; keep the cursor above their content.
+      const host = document.querySelector('dialog[open]') || document.body;
+      if (cursor.parentElement !== host) host.append(cursor);
+    }
+
+    function hide() {
+      position = null;
+      if (frame) cancelAnimationFrame(frame);
+      frame = 0;
+      cursor.classList.remove('is-visible');
+      document.documentElement.classList.remove('has-custom-cursor');
+    }
+
+    function draw() {
+      frame = 0;
+      if (!position) return;
+      syncHost();
+      cursor.style.transform = `translate3d(${position.x}px, ${position.y}px, 0) translate(-50%, -50%)`;
+      cursor.classList.add('is-visible');
+      document.documentElement.classList.add('has-custom-cursor');
+    }
+
+    document.addEventListener('pointermove', event => {
+      if (!finePointer.matches || event.pointerType !== 'mouse') {
+        hide();
+        return;
+      }
+      position = { x: event.clientX, y: event.clientY };
+      if (!frame) frame = requestAnimationFrame(draw);
+    }, { passive: true });
+    document.addEventListener('pointerout', event => { if (!event.relatedTarget) hide(); });
+    document.addEventListener('pointerdown', event => { if (event.pointerType !== 'mouse') hide(); }, { passive: true });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) hide(); });
+    window.addEventListener('blur', hide);
+    finePointer.addEventListener('change', hide);
+    document.querySelectorAll('dialog').forEach(dialog => {
+      new MutationObserver(syncHost).observe(dialog, { attributes: true, attributeFilter: ['open'] });
+    });
   }
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -512,6 +559,7 @@
   initIllustrationGallery();
   initTopNav();
   initFooter();
+  initCursor();
   homeController = initHome();
   if (!homeController) pageEntrance();
   initNavigationTransitions();
